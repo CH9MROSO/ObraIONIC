@@ -12,8 +12,23 @@
     <ion-list>
 
       <ion-item>
-        <ion-label fixed>{{ 'NAME' | translate }}</ion-label>
-        <ion-input type="text" [(ngModel)]="account.name" name="name"></ion-input>
+        <ion-label fixed>Nombre</ion-label>
+        <ion-input type="text" [(ngModel)]="account.first_name" name="first_name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label fixed>Apellidos</ion-label>
+        <ion-input type="text" [(ngModel)]="account.surname" name="surname"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label fixed>Fecha de nacimiento</ion-label>
+        <ion-input type="date" [(ngModel)]="account.birthday" name="birthday"></ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label fixed>Género</ion-label>
+        <ion-input type="text" [(ngModel)]="account.gender" name="gender"></ion-input>
       </ion-item>
 
       <ion-item>
@@ -21,18 +36,24 @@
         <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
       </ion-item>
 
-      <!--
-      Want to add a Username? Here you go:
-
-      <ion-item>
-        <ion-label floating>Username</ion-label>
-        <ion-input type="text" [(ngModel)]="account.username" name="username"></ion-input>
-      </ion-item>
-      -->
-
       <ion-item>
         <ion-label fixed>{{ 'PASSWORD' | translate }}</ion-label>
         <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label fixed>Designación</ion-label>
+        <ion-input type="text" [(ngModel)]="account.appointment" name="appointment"></ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label fixed>Colegio</ion-label>
+        <ion-input type="text" [(ngModel)]="account.collage" name="collage"></ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label fixed>Nº de Colegiado</ion-label>
+        <ion-input type="text" [(ngModel)]="account.num_collage" name="num_collage"></ion-input>
       </ion-item>
 
       <div padding>

@@ -1,0 +1,49 @@
+<ion-header>
+
+    <ion-navbar>
+      <ion-title>Listado de Obras</ion-title>
+  
+      <ion-buttons end>
+        <button ion-button icon-only (click)="addItem()">
+          <ion-icon name="add"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  <ion-content>
+  
+    <ion-list>
+      <ion-item-sliding *ngFor="let item of currentItems">
+        <button ion-item (click)="openItem(item)">
+        <ion-grid>
+            <ion-row>
+              <ion-col col-2>
+                <ion-note *ngIf="item.id" color="primary">{{item.id}}</ion-note>
+                <br>
+                <ion-note *ngIf="item.fecha_inicio" color="secondary">{{item.fecha_inicio | date: 'yy'}}</ion-note>
+                <ion-note *ngIf="item.fecha_fin" color="secondary">/{{item.fecha_fin | date: 'yy'}}</ion-note>
+              </ion-col>
+              <ion-col>
+                <h2 *ngIf="item.descripcion">{{item.descripcion}}</h2>
+                <p *ngIf="item.ubicacion">{{item.ubicacion}}</p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-avatar item-end *ngIf="item.profilePic">
+            <img [src]="item.profilePic" />
+          </ion-avatar>
+        </button>
+  
+        <ion-item-options>
+          <button ion-button color="danger" (click)="deleteItem(item)">
+            {{ 'DELETE_BUTTON' | translate }}
+          </button>
+          <button ion-button color="primary" (click)="updateItem(item)">
+            EDIT
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </ion-content>

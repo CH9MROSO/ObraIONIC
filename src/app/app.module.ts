@@ -14,6 +14,15 @@ import { Settings } from '../providers/providers';
 import { User } from '../providers/providers';
 import { Api } from '../providers/providers';
 import { MyApp } from './app.component';
+import { ObrasProvider } from '../providers/obras/obras';
+
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+
+import {LOCALE_ID} from '@angular/core';
+
+// the second parameter 'es' is optional
+registerLocaleData(localeEs, 'es');
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -66,7 +75,10 @@ export function provideSettings(storage: Storage) {
     StatusBar,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     // Keep this to enable Ionic's runtime error handling during development
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    ObrasProvider,
+    // Estable como idioma Local el ES , por ejemplo en PIPE date
+    { provide: LOCALE_ID, useValue: 'es' }
   ]
 })
 export class AppModule { }

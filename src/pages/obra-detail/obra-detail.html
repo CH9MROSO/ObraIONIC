@@ -1,0 +1,21 @@
+<ion-header>
+
+    <ion-navbar>
+      <ion-title>{{ obra.id + '-' + obra.descripcion}}</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content>
+    <img *ngIf="obra.profilePic" [src]="obra.profilePic">
+    <div class="item-detail" padding>
+      <h2>{{obra.id}}</h2>
+      <p>{{obra.fecha_inicio | date:'longDate'}}
+        <span *ngIf="obra.fecha_fin"> - {{obra.fecha_fin | date:'longDate'}}</span>
+      </p>
+      <h3>{{obra.descripcion}}</h3>
+      <p>{{obra.ubicacion}}</p>
+      <h3>{{obra.estado}}</h3>
+    </div>
+  </ion-content>
