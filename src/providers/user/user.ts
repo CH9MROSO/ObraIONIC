@@ -59,9 +59,24 @@ export class User {
     seq.subscribe((res: any) => {
       // If the API returned a successful response, mark the user as logged in
       if (res.success) {
-        this.login(res);
+        console.log('Registro Ok');
+        this.logout;
       }
     }, err => {
+      console.error('ERROR', err);
+    });
+
+    return seq;
+  }
+
+  updateSignup(id:number, accountInfo: any) {
+    let seq = this.api.put('perfiles', id, accountInfo).share();
+    seq.subscribe((res: any) => {
+      if(res.success){
+        console.log('Actualización de Registro Ok');
+        this.logout;
+      }
+    }, (err) => {
       console.error('ERROR', err);
     });
 
@@ -73,6 +88,7 @@ export class User {
    */
   logout() {
     this._user = null;
+    this.api.token = '';
   }
 
   /**

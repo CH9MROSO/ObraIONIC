@@ -10,12 +10,49 @@
   <ion-content>
     <img *ngIf="obra.profilePic" [src]="obra.profilePic">
     <div class="item-detail" padding>
-      <h2>{{obra.id}}</h2>
-      <p>{{obra.fecha_inicio | date:'longDate'}}
-        <span *ngIf="obra.fecha_fin"> - {{obra.fecha_fin | date:'longDate'}}</span>
-      </p>
-      <h3>{{obra.descripcion}}</h3>
-      <p>{{obra.ubicacion}}</p>
-      <h3>{{obra.estado}}</h3>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-1 align-self-start>
+              <p><ion-icon name="key" color="primary"></ion-icon></p>
+          </ion-col>
+          <ion-col align-self-end>
+              <h2> {{obra.id}}</h2>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-1 align-self-start>
+              <p><ion-icon name="calendar" color="secondary"></ion-icon></p>
+          </ion-col>
+          <ion-col align-self-end>
+              <p> {{obra.fecha_inicio | date:'longDate'}}
+                <span *ngIf="obra.fecha_fin"> - {{obra.fecha_fin | date:'longDate'}}</span>
+              </p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-1 align-self-start>
+              <p><ion-icon name="home"></ion-icon></p>
+          </ion-col>
+          <ion-col align-self-end>
+              <h3> {{obra.descripcion}}</h3>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-1 align-self-start>
+              <p><ion-icon name="locate"></ion-icon></p>
+          </ion-col>
+          <ion-col align-self-end>
+              <p> {{obra.ubicacion}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-1 align-self-start>
+              <p><ion-icon name="cog" color="auxiliar"></ion-icon></p>
+          </ion-col>
+          <ion-col align-self-end>
+              <h3> {{obra.estado}}</h3>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </div>
   </ion-content>

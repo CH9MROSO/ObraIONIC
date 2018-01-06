@@ -24,6 +24,10 @@
   
   
   <ion-content>
+    <ion-item *ngIf="!unableCamera" >
+      <ion-label>{{labelResponse}}</ion-label>
+      <ion-toggle [(ngModel)]="conditionCamera" color="primary" checked="true" (ionChange)="changeLabel()"></ion-toggle>
+    </ion-item>
     <form *ngIf="form" [formGroup]="form" (ngSubmit)="createItem()">
       <input type="file" #fileInput style="visibility: hidden; height: 0px" name="files[]" (change)="processWebImage($event)" />
       <div class="profile-image-wrapper" (click)="getPicture()">

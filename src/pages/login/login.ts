@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController, LoadingController } from 'ionic-angular';
 
 import { User } from '../../providers/providers';
 import { MainPage } from '../pages';
@@ -16,8 +16,8 @@ export class LoginPage {
   // If you're using the username field with or without email, make
   // sure to add it to the type
   account: { _username: string, _password: string, token: string } = {
-    _username: 'test@example.com',
-    _password: 'test',
+    _username: 'joaquintest@example.com',
+    _password: '1221',
     token: ''
   };
 
@@ -27,6 +27,7 @@ export class LoginPage {
   constructor(public navCtrl: NavController,
     public user: User,
     public toastCtrl: ToastController,
+    public loadingCtrl: LoadingController,
     public translateService: TranslateService) {
 
     this.translateService.get('LOGIN_ERROR').subscribe((value) => {
@@ -38,7 +39,8 @@ export class LoginPage {
   doLogin() {
     this.user.login(this.account).subscribe((resp:any) => {
       if(resp && resp.success){
-        this.navCtrl.push(MainPage);
+        this.doNavigate();
+        
       } else {
         this.doErrorLogin();
       }
@@ -56,5 +58,16 @@ export class LoginPage {
         position: 'top'
       });
       toast.present();
+  }
+
+  doNavigate() {
+    let loading = this.loadingCtrl.create({
+      spinner: 'circles',
+      content: 'Cargando, Espere porfavor...',
+      duration: 3000
+    });
+  
+    loading.present();
+    this.navCtrl.push(MainPage);
   }
 }

@@ -17,7 +17,12 @@ export class ObraCreatePage {
 
   form: FormGroup;
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera) {
+  unableCamera: boolean = true;
+  conditionCamera: boolean = true;
+  labelResponse: string="Cámara";
+
+  constructor(public navCtrl: NavController, public viewCtrl: ViewController, 
+              formBuilder: FormBuilder, public camera: Camera) {
     if(viewCtrl.data){
       this.item = viewCtrl.data;
       this.form = formBuilder.group({
@@ -27,7 +32,7 @@ export class ObraCreatePage {
         ubicacion: [this.item.ubicacion, Validators.required],
         fecha_inicio: [this.item.fecha_inicio],
         fecha_fin: [this.item.fecha_fin],
-        estado: [this.item.estado],
+        estado: [this.item.estado]
       });
     }else{
       this.form = formBuilder.group({
@@ -37,7 +42,7 @@ export class ObraCreatePage {
         ubicacion: ['', Validators.required],
         fecha_inicio: [''],
         fecha_fin: [''],
-        estado: [''],
+        estado: ['']
       });
     }
 
@@ -48,19 +53,29 @@ export class ObraCreatePage {
   }
 
   ionViewDidLoad() {
-
+    if (Camera['installed']()) {
+      this.unableCamera = false;
+    }
+  }
+  changeLabel() {
+    if(!this.conditionCamera){
+      this.labelResponse = "Archivo";
+    }
+    else{
+      this.labelResponse = "Cámara";
+    }
   }
 
   getPicture() {
-    if (Camera['installed']()) {
+    if (Camera['installed']() && this.conditionCamera) {
       this.camera.getPicture({
         destinationType: this.camera.DestinationType.DATA_URL,
-        targetWidth: 96,
-        targetHeight: 96
+        targetWidth:  800,
+        targetHeight: 600
       }).then((data) => {
         this.form.patchValue({ 'profilePic': 'data:image/jpg;base64,' + data });
       }, (err) => {
-        alert('Unable to take photo');
+        alert('Foto no disponible');
       })
     } else {
       this.fileInput.nativeElement.click();
@@ -71,10 +86,13 @@ export class ObraCreatePage {
     let reader = new FileReader();
     reader.onload = (readerEvent) => {
 
-      let imageData = (readerEvent.target as any).result;
-      this.form.patchValue({ 'profilePic': imageData });
+      let imageData:string = (readerEvent.target as any).result;
+      if (imageData.length < 1024000){
+        this.form.patchValue({ 'profilePic': imageData });
+      } else{
+        alert('Tamaño imagen excesivo');
+      }
     };
-
     reader.readAsDataURL(event.target.files[0]);
   }
 

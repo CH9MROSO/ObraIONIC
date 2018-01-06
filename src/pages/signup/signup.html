@@ -8,7 +8,7 @@
 
 
 <ion-content>
-  <form (submit)="doSignup()">
+  <form (submit)="modeUpdate?updateSignup():doSignup()">
     <ion-list>
 
       <ion-item>
@@ -36,7 +36,7 @@
         <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
       </ion-item>
 
-      <ion-item>
+      <ion-item *ngIf="!modeUpdate">
         <ion-label fixed>{{ 'PASSWORD' | translate }}</ion-label>
         <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
       </ion-item>
@@ -57,7 +57,7 @@
       </ion-item>
 
       <div padding>
-        <button ion-button color="primary" block>{{ 'SIGNUP_BUTTON' | translate }}</button>
+        <button ion-button color="primary" block>{{modeUpdate? 'Actualizar Perfil':'SIGNUP_BUTTON' | translate }}</button>
       </div>
 
     </ion-list>

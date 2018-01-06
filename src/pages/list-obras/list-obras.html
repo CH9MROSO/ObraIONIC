@@ -38,10 +38,12 @@
   
         <ion-item-options>
           <button ion-button color="danger" (click)="deleteItem(item)">
-            {{ 'DELETE_BUTTON' | translate }}
+              <h2><ion-icon name="trash"></ion-icon></h2>
+              Eliminar
           </button>
           <button ion-button color="primary" (click)="updateItem(item)">
-            EDIT
+              <h2><ion-icon name="create"></ion-icon></h2>
+              Editar
           </button>
         </ion-item-options>
       </ion-item-sliding>

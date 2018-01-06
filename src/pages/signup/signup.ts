@@ -1,9 +1,9 @@
 import { WelcomePage } from './../welcome/welcome';
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController, NavParams } from 'ionic-angular';
 
-import { User } from '../../providers/providers';
+import { User, Api } from '../../providers/providers';
 import { MainPage } from '../pages';
 
 @IonicPage()
@@ -18,13 +18,14 @@ export class SignupPage {
   account: {  first_name: string, surname: string, birthday: string, gender: string, 
               email: string, password: string, 
               appointment: string, collage: string, num_collage: string, 
-              role: string, _username: string, _password: string, token: string} = {
+              role: string, _username: string, _password: string, token: string} = 
+/*   {
     first_name: 'Francisco',
     surname: 'Robles Pérez',
     birthday: '1980-01-01',
     gender: 'Masculino',
     email: 'test@example.com',
-    password: '1234',
+    password: 'test',
     appointment: 'Arquitecto Técnico',
     collage: 'COAAT-CC',
     num_collage: '1234',
@@ -32,7 +33,26 @@ export class SignupPage {
     _username: '',
     _password: '',
     token : ''
+  }; */
+  {
+    first_name: '',
+    surname: '',
+    birthday: '',
+    gender: '',
+    email: '',
+    password: '',
+    appointment: '',
+    collage: '',
+    num_collage: '',
+    role: 'Usuario',
+    _username: '',
+    _password: '',
+    token : ''
   };
+  
+  id: number;
+
+  modeUpdate: boolean = false;
 
   // Our translated text strings
   private signupErrorString: string;
@@ -40,9 +60,11 @@ export class SignupPage {
   private loginErrorString: string;
 
   constructor(public navCtrl: NavController,
-    public user: User,
-    public toastCtrl: ToastController,
-    public translateService: TranslateService) {
+              navParams: NavParams,
+              public api: Api,
+              public user: User,
+              public toastCtrl: ToastController,
+              public translateService: TranslateService) {
 
     this.translateService.get('SIGNUP_ERROR').subscribe((value) => {
       this.signupErrorString = value;
@@ -50,27 +72,52 @@ export class SignupPage {
     this.translateService.get('LOGIN_ERROR').subscribe((value) => {
       this.loginErrorString = value;
     })
+    if(navParams.data.configPerfil){
+      this.modeUpdate = navParams.data.configPerfil;
+      this.getPerfil();
+    }
+  }
+
+  getPerfil() {
+    this.api.get('perfil').subscribe((resp:any) => {
+      if(resp.id){
+        this.id = resp.id;
+        this.account = resp;
+        
+      } else {
+        this.doErrorToast('Error obteniendo Perfil Usuario');
+      }
+    }, (err) => {
+      this.doErrorToast('Error obteniendo Perfil de Usuario');
+    });
+  }
+
+  updateSignup() {
+    // Attempt to login in through our User service
+    this.user.updateSignup(this.id, this.account).subscribe((resp: any) => {
+      if(resp){
+        this.navCtrl.push(WelcomePage);
+      } else {
+        this.doErrorToast('Error actualizando Perfil de Usuario');
+      }
+    }, (err) => {
+      // Unable to sign up
+      this.doErrorToast('Error actualizando Perfil de Usuario');
+    });
   }
 
   doSignup() {
     // Attempt to login in through our User service
     this.user.signup(this.account).subscribe((resp: any) => {
       if(resp){
-        this.account._username = this.account.email;
-        this.account._password = this.account.password;
-        this.doLogin();
+        this.navCtrl.push(WelcomePage);
       }
     }, (err) => {
 
       this.navCtrl.push(WelcomePage);
 
       // Unable to sign up
-      let toast = this.toastCtrl.create({
-        message: this.signupErrorString,
-        duration: 3000,
-        position: 'top'
-      });
-      toast.present();
+      this.doErrorToast(this.signupErrorString);
     });
   }
 
@@ -80,22 +127,21 @@ export class SignupPage {
       if(resp && resp.success){
         this.navCtrl.push(MainPage);
       } else {
-        this.doErrorLogin();
+        this.doErrorToast(this.loginErrorString);
       }
     }, (err) => {
-      this.doErrorLogin();
+      this.doErrorToast(this.loginErrorString);
     });
   }
 
-  doErrorLogin() {
-    this.navCtrl.push(WelcomePage);
-      // Unable to log in
-      let toast = this.toastCtrl.create({
-        message: this.loginErrorString,
-        duration: 3000,
-        position: 'top'
-      });
-      toast.present();
-  }
+  doErrorToast(msg: string) {
+    // Unable to log in
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present();
+}
   
 }
