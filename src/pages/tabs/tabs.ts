@@ -28,7 +28,8 @@ export class TabsPage {
   constructor(public navCtrl: NavController, public translateService: TranslateService, public api: Api) {
 
       this.tab1Title = 'Obras';
-      this.tab2Title = 'Buscar';
+/*       this.tab2Title = 'Buscar'; */
+      this.tab2Title = 'Contactos';
       this.tab3Title = 'Perfil';
   }
 }

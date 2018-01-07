@@ -15,6 +15,8 @@ import { User } from '../providers/providers';
 import { Api } from '../providers/providers';
 import { MyApp } from './app.component';
 import { ObrasProvider } from '../providers/obras/obras';
+import { ClientesProvider } from '../providers/clientes/clientes';
+import { ContactosProvider } from '../providers/contactos/contactos';
 
 /* import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
@@ -76,7 +78,9 @@ export function provideSettings(storage: Storage) {
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    ObrasProvider
+    ObrasProvider,
+    ClientesProvider,
+    ContactosProvider
 /*     // Estable como idioma Local el ES , por ejemplo en PIPE date
     , { provide: LOCALE_ID, useValue: 'es' } */
   ]

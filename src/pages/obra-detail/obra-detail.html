@@ -1,14 +1,14 @@
 <ion-header>
 
     <ion-navbar>
-      <ion-title>{{ obra.id + '-' + obra.descripcion}}</ion-title>
+      <ion-title>{{ item.id + '-' + item.descripcion}}</ion-title>
     </ion-navbar>
   
   </ion-header>
   
   
   <ion-content>
-    <img *ngIf="obra.profilePic" [src]="obra.profilePic">
+    <img *ngIf="item.profilePic" [src]="item.profilePic">
     <div class="item-detail" padding>
       <ion-grid>
         <ion-row>
@@ -16,7 +16,7 @@
               <p><ion-icon name="key" color="primary"></ion-icon></p>
           </ion-col>
           <ion-col align-self-end>
-              <h2> {{obra.id}}</h2>
+              <h2> {{item.id}}</h2>
           </ion-col>
         </ion-row>
         <ion-row>
@@ -24,8 +24,8 @@
               <p><ion-icon name="calendar" color="secondary"></ion-icon></p>
           </ion-col>
           <ion-col align-self-end>
-              <p> {{obra.fecha_inicio | date:'longDate'}}
-                <span *ngIf="obra.fecha_fin"> - {{obra.fecha_fin | date:'longDate'}}</span>
+              <p> {{item.fecha_inicio | date:'longDate'}}
+                <span *ngIf="item.fecha_fin"> - {{item.fecha_fin | date:'longDate'}}</span>
               </p>
           </ion-col>
         </ion-row>
@@ -34,7 +34,7 @@
               <p><ion-icon name="home"></ion-icon></p>
           </ion-col>
           <ion-col align-self-end>
-              <h3> {{obra.descripcion}}</h3>
+              <h3> {{item.descripcion}}</h3>
           </ion-col>
         </ion-row>
         <ion-row>
@@ -42,7 +42,7 @@
               <p><ion-icon name="locate"></ion-icon></p>
           </ion-col>
           <ion-col align-self-end>
-              <p> {{obra.ubicacion}}</p>
+              <p> {{item.ubicacion}}</p>
           </ion-col>
         </ion-row>
         <ion-row>
@@ -50,7 +50,7 @@
               <p><ion-icon name="cog" color="auxiliar"></ion-icon></p>
           </ion-col>
           <ion-col align-self-end>
-              <h3> {{obra.estado}}</h3>
+              <h3> {{item.estado}}</h3>
           </ion-col>
         </ion-row>
       </ion-grid>

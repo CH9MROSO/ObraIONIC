@@ -16,10 +16,10 @@ import { Obra } from '../../models/obra';
 })
 export class ObraDetailPage {
 
-  obra: Obra;
+  item: Obra;
 
   constructor(public navCtrl: NavController, navParams: NavParams) {
-    this.obra = navParams.get('obra') || new Obra();
+    this.item = navParams.get('obra') || new Obra();
   }
 
 }

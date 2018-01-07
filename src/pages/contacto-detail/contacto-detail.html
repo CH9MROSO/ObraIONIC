@@ -1,0 +1,74 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ item.id + '-' + item.nombre_razon+ '-' + item.apellidos}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <img *ngIf="item.profilePic" [src]="item.profilePic">
+  <div class="item-detail" padding>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-1 align-self-start>
+            <p><ion-icon name="contact" color="primary"></ion-icon></p>
+        </ion-col>
+        <ion-col align-self-end>
+            <h2> {{item.nombre_razon + ' ' + item.apellidos}}</h2>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-1 align-self-start>
+            <p><ion-icon name="pin" color="primary"></ion-icon></p>
+        </ion-col>
+        <ion-col align-self-end>
+            <p> {{item.direccion}}</p>
+            <p> {{item.cp + '-' + item.municipio}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-1 align-self-start>
+            <p><ion-icon name="locate" color="primary"></ion-icon></p>
+        </ion-col>
+        <ion-col align-self-end>
+            <p> {{'(' + item.Provincia + ')' + '-' + item.Pais}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-1 align-self-start>
+            <p><ion-icon name="call" color="primary"></ion-icon></p>
+        </ion-col>
+        <ion-col align-self-end>
+          <p> {{item.telefono}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-1 align-self-start>
+            <p><ion-icon name="mail" color="primary"></ion-icon></p>
+        </ion-col>
+        <ion-col align-self-end>
+          <p> {{item.email}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-1 align-self-start>
+            <p><ion-icon name="person" color="primary"></ion-icon></p>
+        </ion-col>
+        <ion-col align-self-end>
+          <p> {{item.tipo_persona_juridica}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-1 align-self-start>
+            <p><ion-icon name="contacts" color="primary"></ion-icon></p>
+        </ion-col>
+        <ion-col align-self-end>
+          <p> {{item.representante}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
+

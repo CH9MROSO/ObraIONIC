@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams, ModalController, ToastController }
 
 import { ObrasProvider } from '../../providers/obras/obras';
 import { Obra } from '../../models/obra';
-import { WelcomePage } from '../welcome/welcome';
 
 /**
  * Generated class for the ListObrasPage page.

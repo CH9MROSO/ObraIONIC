@@ -1,0 +1,56 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Listado de Contactos</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addItem()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let item of currentItems">
+      <button ion-item (click)="openItem(item)">
+      <ion-grid>
+          <ion-row>
+            <ion-col col-5>
+              <ion-note *ngIf="item.telefono" color="primary">{{item.telefono}}</ion-note>
+            </ion-col>
+            <ion-col>
+              <ion-note *ngIf="item.nombre_razon" color="primary">{{item.nombre_razon}}</ion-note>
+              <ion-note *ngIf="item.apellidos" color="primary">{{' ' + item.apellidos}}</ion-note>
+              <p *ngIf="item.direccion">{{item.direccion}}</p>
+              <p>
+                <span *ngIf="item.cp">{{item.cp}}</span>
+                <span *ngIf="item.cp && item.municipio">{{'-'}}</span>
+                <span *ngIf="item.municipio">{{item.municipio}}</span>
+              </p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-avatar item-end *ngIf="item.profilePic">
+          <img [src]="item.profilePic" />
+        </ion-avatar>
+        <ion-note *ngIf="item.email" color="secondary">{{item.email}}</ion-note>
+      </button>
+
+      <ion-item-options>
+        <button ion-button color="danger" (click)="deleteItem(item)">
+            <h2><ion-icon name="trash"></ion-icon></h2>
+            Eliminar
+        </button>
+        <button ion-button color="primary" (click)="updateItem(item)">
+            <h2><ion-icon name="create"></ion-icon></h2>
+            Editar
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
+
