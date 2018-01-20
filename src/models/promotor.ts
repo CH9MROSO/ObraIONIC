@@ -1,6 +1,6 @@
 import { Contacto } from "./contacto";
 
-export class Cliente extends Contacto{
+export class Promotor extends Contacto{
 
     public id: number;
     public contacto_id: number;

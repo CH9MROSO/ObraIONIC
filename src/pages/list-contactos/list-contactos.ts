@@ -73,7 +73,7 @@ export class ListContactosPage {
     
     this.contactosSrv.deleteContacto(item.id).subscribe((resp:any) => {
       if(resp && resp.success){
-        console.log('Contacto eliminada');
+        console.log('Contacto eliminado');
         this.navCtrl.push(ListContactosPage);
         
       } else {
@@ -89,7 +89,8 @@ export class ListContactosPage {
    */
   openItem(item: Contacto) {
     this.navCtrl.push('ContactoDetailPage', {
-      contacto: item
+      typeItem: 'Contacto',
+      item: item,
     });
   }
 

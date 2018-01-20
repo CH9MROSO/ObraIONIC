@@ -25,7 +25,7 @@ export class ContactoCreatePage {
               formBuilder: FormBuilder, public camera: Camera) {
     if(viewCtrl.data){
       this.item = viewCtrl.data;
-      this.form = formBuilder.group({
+      let group = {
         profilePic: [this.item.profilePic],
         dni_cif: [this.item.dni_cif],
         nombre_razon: [this.item.nombre_razon, Validators.required],
@@ -39,9 +39,23 @@ export class ContactoCreatePage {
         telefono: [this.item.telefono],
         tipo_persona_juridica: [this.item.tipo_persona_juridica],
         representante: [this.item.representante]
-      });
+      };
+      if(viewCtrl.data.contacto_id){
+        group['contacto_id'] = viewCtrl.data.contacto_id;
+      }
+      if(viewCtrl.data.intervencion){
+        group['intervencion'] = viewCtrl.data.intervencion;
+      }
+      if(viewCtrl.data.fase_obra){
+        group['fase_obra'] = viewCtrl.data.fase_obra;
+      }
+      if(viewCtrl.data.cargo){
+        group['cargo'] = viewCtrl.data.cargo;
+      }
+      this.form = formBuilder.group(group);
+
     }else{
-      this.form = formBuilder.group({
+      let group = {
         profilePic: [''],
         dni_cif: [''],
         nombre_razon: ['', Validators.required],
@@ -55,7 +69,8 @@ export class ContactoCreatePage {
         telefono: [''],
         tipo_persona_juridica: [''],
         representante: ['']
-      });
+      };
+      this.form = formBuilder.group(group);
     }
 
     // Watch the form for changes, and

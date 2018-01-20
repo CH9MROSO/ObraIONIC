@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, ToastController } from 'ionic-angular';
 
-import { ClientesProvider } from '../../providers/clientes/clientes';
+import { AgentesProvider } from '../../providers/agentes/agentes';
 import { Cliente } from '../../models/cliente';
 
 /**
@@ -19,14 +19,14 @@ import { Cliente } from '../../models/cliente';
 export class ListClientesPage {
   currentItems: Cliente[];
 
-  constructor(public navCtrl: NavController, public clientesSrv: ClientesProvider, 
+  constructor(public navCtrl: NavController, public agentesSrv: AgentesProvider, 
               public modalCtrl: ModalController, public toastCtrl: ToastController) {
-    this.clientesSrv.getAllClientes().subscribe((resp:any) => {
+    this.agentesSrv.getAllClientes().subscribe((resp:any) => {
       if(resp && resp.success){
         this.currentItems = resp.clientes;
         
       } else {
-        this.doErrorToastCliente('Error al obtener Clientes');
+        this.doErrorToastCliente('No existen Clientes');
       }
     }, (err) => {
       this.doErrorToastCliente('Error al obtener Clientes');
@@ -49,9 +49,9 @@ export class ListClientesPage {
       if (clienteNuevo) {
         console.log(clienteNuevo);
         
-        this.clientesSrv.createCliente(clienteNuevo).subscribe((resp:any) => {
+        this.agentesSrv.createCliente(clienteNuevo, 0, 0).subscribe((resp:any) => {
           if(resp && resp.success){
-            console.log('Cliente creada');
+            console.log('Cliente creado');
             this.navCtrl.push(ListClientesPage);
             
           } else {
@@ -71,7 +71,7 @@ export class ListClientesPage {
   deleteItem(item) {
     console.log(item.id);
     
-    this.clientesSrv.deleteCliente(item.id).subscribe((resp:any) => {
+    this.agentesSrv.deleteCliente(item.id).subscribe((resp:any) => {
       if(resp && resp.success){
         console.log('Cliente eliminada');
         this.navCtrl.push(ListClientesPage);
@@ -80,7 +80,7 @@ export class ListClientesPage {
         this.doErrorToastCliente('Error eliminando Cliente');
       }
     }, (err) => {
-      this.doErrorToastCliente('Error actualizando Cliente');
+      this.doErrorToastCliente('Error eliminando Cliente');
     });
   }
 
@@ -88,8 +88,9 @@ export class ListClientesPage {
    * Navigate to the detail page for this item.
    */
   openItem(item: Cliente) {
-    this.navCtrl.push('ClienteDetailPage', {
-      cliente: item
+    this.navCtrl.push('ContactoDetailPage', {
+      typeItem: 'Cliente',
+      item: item,
     });
   }
 
@@ -102,7 +103,7 @@ export class ListClientesPage {
       if (clienteActualizado) {
         console.log(clienteActualizado);
         
-        this.clientesSrv.updateCliente(item.id, clienteActualizado).subscribe((resp:any) => {
+        this.agentesSrv.updateCliente(item.id, clienteActualizado).subscribe((resp:any) => {
           if(resp && resp.success){
             console.log('Cliente actualizado');
             this.navCtrl.push(ListClientesPage);

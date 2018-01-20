@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Obra } from '../../models/obra';
+import { ListVisitasPage } from '../list-visitas/list-visitas';
 
 /**
  * Generated class for the ObraDetailPage page.
@@ -20,6 +21,10 @@ export class ObraDetailPage {
 
   constructor(public navCtrl: NavController, navParams: NavParams) {
     this.item = navParams.get('obra') || new Obra();
+  }
+
+  openVisit(){
+    this.navCtrl.push('ListVisitasPage', {'obra': this.item});
   }
 
 }

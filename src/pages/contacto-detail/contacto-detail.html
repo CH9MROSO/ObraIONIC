@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{ item.id + '-' + item.nombre_razon+ '-' + item.apellidos}}</ion-title>
+    <ion-title>{{item.type}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -9,60 +9,121 @@
 
 <ion-content>
   <img *ngIf="item.profilePic" [src]="item.profilePic">
+  <!--   Sección de Detalles de la Relación del Contacto con la Obra -->
+  <div *ngIf="item.intervencion || item.fase_obra" class="item-detail" padding>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-1 align-self-start *ngIf="item.intervencion">
+          <p>
+            <ion-icon name="cog" color="primary"></ion-icon>
+          </p>
+        </ion-col>
+        <ion-col align-self-end *ngIf="item.intervencion">
+          <p> Intervención Obra</p>
+          <h3> {{item.intervencion}}</h3>
+        </ion-col>
+        <ion-col col-1 align-self-start *ngIf="item.fase_obra">
+          <p>
+            <ion-icon name="construct" color="primary"></ion-icon>
+          </p>
+        </ion-col>
+        <ion-col align-self-end *ngIf="item.fase_obra">
+          <p> Fase de Obra</p>
+          <h3> {{item.fase_obra}}</h3>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <hr>
+  </div>
+  <!--   Sección de Detalles del Contacto -->
   <div class="item-detail" padding>
     <ion-grid>
       <ion-row>
         <ion-col col-1 align-self-start>
-            <p><ion-icon name="contact" color="primary"></ion-icon></p>
+          <p>
+            <ion-icon name="contact" color="primary"></ion-icon>
+          </p>
         </ion-col>
         <ion-col align-self-end>
-            <h2> {{item.nombre_razon + ' ' + item.apellidos}}</h2>
+          <h2> {{item.nombre_razon + ' ' + item.apellidos}}</h2>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row *ngIf="item.direccion || item.cp || item.municipio">
         <ion-col col-1 align-self-start>
-            <p><ion-icon name="pin" color="primary"></ion-icon></p>
+          <p>
+            <ion-icon name="pin" color="primary"></ion-icon>
+          </p>
         </ion-col>
         <ion-col align-self-end>
-            <p> {{item.direccion}}</p>
-            <p> {{item.cp + '-' + item.municipio}}</p>
+          <p *ngIf="item.direccion"> {{item.direccion}}</p>
+          <p *ngIf="item.cp || item.municipio">
+            <span *ngIf="item.cp">
+              {{item.cp}}
+            </span>
+            <span *ngIf="item.cp && item.municipio">
+              -
+            </span>
+            <span *ngIf="item.municipio">
+              {{item.municipio}}
+            </span>
+          </p>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row *ngIf="item.Provincia || item.Pais">
         <ion-col col-1 align-self-start>
-            <p><ion-icon name="locate" color="primary"></ion-icon></p>
+          <p>
+            <ion-icon name="locate" color="primary"></ion-icon>
+          </p>
         </ion-col>
         <ion-col align-self-end>
-            <p> {{'(' + item.Provincia + ')' + '-' + item.Pais}}</p>
+          <p>
+            <span *ngIf="item.Provincia">
+              {{item.Provincia}}
+            </span>
+            <span *ngIf="item.Provincia && item.Pais">
+              -
+            </span>
+            <span *ngIf="item.Pais">
+              {{item.Pais}}
+            </span>
+          </p>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row *ngIf="item.telefono">
         <ion-col col-1 align-self-start>
-            <p><ion-icon name="call" color="primary"></ion-icon></p>
+          <p>
+            <ion-icon name="call" color="primary"></ion-icon>
+          </p>
         </ion-col>
         <ion-col align-self-end>
           <p> {{item.telefono}}</p>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row *ngIf="item.email">
         <ion-col col-1 align-self-start>
-            <p><ion-icon name="mail" color="primary"></ion-icon></p>
+          <p>
+            <ion-icon name="mail" color="primary"></ion-icon>
+          </p>
         </ion-col>
         <ion-col align-self-end>
           <p> {{item.email}}</p>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row *ngIf="item.tipo_persona_juridica">
         <ion-col col-1 align-self-start>
-            <p><ion-icon name="person" color="primary"></ion-icon></p>
+          <p>
+            <ion-icon name="person" color="primary"></ion-icon>
+          </p>
         </ion-col>
         <ion-col align-self-end>
           <p> {{item.tipo_persona_juridica}}</p>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row *ngIf="item.representante">
         <ion-col col-1 align-self-start>
-            <p><ion-icon name="contacts" color="primary"></ion-icon></p>
+          <p>
+            <ion-icon name="contacts" color="primary"></ion-icon>
+          </p>
         </ion-col>
         <ion-col align-self-end>
           <p> {{item.representante}}</p>
@@ -71,4 +132,3 @@
     </ion-grid>
   </div>
 </ion-content>
-

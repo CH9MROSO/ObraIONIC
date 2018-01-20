@@ -52,7 +52,12 @@
           <ion-col align-self-end>
               <h3> {{item.estado}}</h3>
           </ion-col>
+          <button ion-button outline item-end icon-left (click)="openVisit()">
+            <ion-icon name="star"></ion-icon>
+            Visitas
+          </button>
         </ion-row>
       </ion-grid>
+      <page-list-agentes-obra [currentIdObra]="item.id"></page-list-agentes-obra>
     </div>
   </ion-content>

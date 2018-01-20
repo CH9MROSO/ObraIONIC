@@ -10,7 +10,8 @@ export class Api {
   public headerGet: Headers;
   token: string = '';
  /*  url: string = 'http://api-obras.local:80/api/v1.0.0'; */
-  url: string = 'http://api-obras.local.192.168.1.35.xip.io:80/api/v1.0.0';
+  url: string = 'http://api-obras.local.192.168.1.96.xip.io:80/api/v1.0.0';
+/*   url: string = 'http://api-obras.local:80/api/v1.0.0'; */
  
 
   constructor(public http: HttpClient) {

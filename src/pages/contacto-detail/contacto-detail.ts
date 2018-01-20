@@ -16,10 +16,11 @@ import { Contacto } from '../../models/contacto';
 })
 export class ContactoDetailPage {
 
-  item: Contacto;
+  item: any;
 
   constructor(public navCtrl: NavController, navParams: NavParams) {
-    this.item = navParams.get('contacto') || new Contacto();
+    this.item = navParams.get('item') || new Contacto();
+    this.item.type = navParams.get('typeItem') || 'Contacto';
   }
 
 }

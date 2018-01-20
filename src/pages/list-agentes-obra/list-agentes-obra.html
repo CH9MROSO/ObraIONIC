@@ -1,0 +1,348 @@
+<!-- SECCION CLIENTES -->
+<ion-item-group>
+  <ion-item-divider color="dark">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-2>
+          <button ion-button icon-only (click)="addItemCliente()">
+            <ion-icon name="add-circle"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col>
+          <ion-title>
+            <font color="white">CLIENTES</font>
+          </ion-title>
+        </ion-col>
+        <ion-col col-2>
+          <button ion-button icon-only (click)="changeCollapseClientes()">
+            <ion-icon [name]="collapseClientes?'arrow-dropup':'arrow-dropdown'"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item-divider>
+  <ion-list *ngIf="collapseClientes">
+    <ion-item-sliding *ngFor="let item of currentItems.Clientes">
+      <button ion-item (click)="openItem(item)">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-5>
+              <ion-note *ngIf="item.telefono" color="primary">{{item.telefono}}</ion-note>
+              <br>
+              <ion-note *ngIf="item.intervencion" color="primary">{{'Interv.: '+ item.intervencion}}</ion-note>
+            </ion-col>
+            <ion-col>
+              <ion-note *ngIf="item.nombre_razon" color="primary">{{item.nombre_razon}}</ion-note>
+              <ion-note *ngIf="item.apellidos" color="primary">{{' ' + item.apellidos}}</ion-note>
+              <p *ngIf="item.direccion">{{item.direccion}}</p>
+              <p>
+                <span *ngIf="item.cp">{{item.cp}}</span>
+                <span *ngIf="item.cp && item.municipio">{{'-'}}</span>
+                <span *ngIf="item.municipio">{{item.municipio}}</span>
+              </p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-avatar item-end *ngIf="item.profilePic">
+          <img [src]="item.profilePic" />
+        </ion-avatar>
+        <ion-note *ngIf="item.email" color="secondary">{{item.email}}</ion-note>
+      </button>
+
+      <ion-item-options>
+        <button ion-button color="danger" (click)="deleteItem(item)">
+          <h2>
+            <ion-icon name="trash"></ion-icon>
+          </h2>
+          Eliminar
+        </button>
+        <button ion-button color="primary" (click)="updateItemCliente(item)">
+          <h2>
+            <ion-icon name="create"></ion-icon>
+          </h2>
+          Editar
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-item-group>
+
+<!-- SECCION PROMOTORES -->
+<ion-item-group>
+  <ion-item-divider color="dark">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-2>
+          <button ion-button icon-only (click)="addItemPromotor()">
+            <ion-icon name="add-circle"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col>
+          <ion-title>
+            <font color="white">PROMOTORES</font>
+          </ion-title>
+        </ion-col>
+        <ion-col col-2>
+          <button ion-button icon-only (click)="changeCollapsePromotores()">
+            <ion-icon [name]="collapsePromotores?'arrow-dropup':'arrow-dropdown'"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item-divider>
+  <ion-list *ngIf="collapsePromotores">
+    <ion-item-sliding *ngFor="let item of currentItems.Promotores">
+      <button ion-item (click)="openItem(item)">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-5>
+              <ion-note *ngIf="item.telefono" color="primary">{{item.telefono}}</ion-note>
+              <br>
+              <ion-note *ngIf="item.intervencion" color="primary">{{'Interv.: '+ item.intervencion}}</ion-note>
+            </ion-col>
+            <ion-col>
+              <ion-note *ngIf="item.nombre_razon" color="primary">{{item.nombre_razon}}</ion-note>
+              <ion-note *ngIf="item.apellidos" color="primary">{{' ' + item.apellidos}}</ion-note>
+              <p *ngIf="item.direccion">{{item.direccion}}</p>
+              <p>
+                <span *ngIf="item.cp">{{item.cp}}</span>
+                <span *ngIf="item.cp && item.municipio">{{'-'}}</span>
+                <span *ngIf="item.municipio">{{item.municipio}}</span>
+              </p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-avatar item-end *ngIf="item.profilePic">
+          <img [src]="item.profilePic" />
+        </ion-avatar>
+        <ion-note *ngIf="item.email" color="secondary">{{item.email}}</ion-note>
+      </button>
+
+      <ion-item-options>
+        <button ion-button color="danger" (click)="deleteItem(item)">
+          <h2>
+            <ion-icon name="trash"></ion-icon>
+          </h2>
+          Eliminar
+        </button>
+        <button ion-button color="primary" (click)="updateItemPromotor(item)">
+          <h2>
+            <ion-icon name="create"></ion-icon>
+          </h2>
+          Editar
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-item-group>
+
+<!-- SECCION CONSTRUCTORES -->
+<ion-item-group>
+  <ion-item-divider color="dark">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-2>
+          <button ion-button icon-only (click)="addItemConstructor()">
+            <ion-icon name="add-circle"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col>
+          <ion-title>
+            <font color="white">CONSTRUCTORES</font>
+          </ion-title>
+        </ion-col>
+        <ion-col col-2>
+          <button ion-button icon-only (click)="changeCollapseConstructores()">
+            <ion-icon [name]="collapseConstructores?'arrow-dropup':'arrow-dropdown'"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item-divider>
+  <ion-list *ngIf="collapseConstructores">
+    <ion-item-sliding *ngFor="let item of currentItems.Constructores">
+      <button ion-item (click)="openItem(item)">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-5>
+              <ion-note *ngIf="item.telefono" color="primary">{{item.telefono}}</ion-note>
+              <br>
+              <ion-note *ngIf="item.intervencion" color="primary">{{'Interv.: '+ item.intervencion}}</ion-note>
+              <br>
+              <ion-note *ngIf="item.fase_obra" color="primary">{{'Fase.: '+ item.fase_obra}}</ion-note>
+            </ion-col>
+            <ion-col>
+              <ion-note *ngIf="item.nombre_razon" color="primary">{{item.nombre_razon}}</ion-note>
+              <ion-note *ngIf="item.apellidos" color="primary">{{' ' + item.apellidos}}</ion-note>
+              <p *ngIf="item.direccion">{{item.direccion}}</p>
+              <p>
+                <span *ngIf="item.cp">{{item.cp}}</span>
+                <span *ngIf="item.cp && item.municipio">{{'-'}}</span>
+                <span *ngIf="item.municipio">{{item.municipio}}</span>
+              </p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-avatar item-end *ngIf="item.profilePic">
+          <img [src]="item.profilePic" />
+        </ion-avatar>
+        <ion-note *ngIf="item.email" color="secondary">{{item.email}}</ion-note>
+      </button>
+
+      <ion-item-options>
+        <button ion-button color="danger" (click)="deleteItem(item)">
+          <h2>
+            <ion-icon name="trash"></ion-icon>
+          </h2>
+          Eliminar
+        </button>
+        <button ion-button color="primary" (click)="updateItemConstructor(item)">
+          <h2>
+            <ion-icon name="create"></ion-icon>
+          </h2>
+          Editar
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-item-group>
+
+<!-- SECCION TÉCNICOS -->
+<ion-item-group>
+  <ion-item-divider color="dark">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-2>
+          <button ion-button icon-only (click)="addItemTecnico()">
+            <ion-icon name="add-circle"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col>
+          <ion-title>
+            <font color="white">TÉCNICOS</font>
+          </ion-title>
+        </ion-col>
+        <ion-col col-2>
+          <button ion-button icon-only (click)="changeCollapseTecnicos()">
+            <ion-icon [name]="collapseTecnicos?'arrow-dropup':'arrow-dropdown'"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item-divider>
+  <ion-list *ngIf="collapseTecnicos">
+    <ion-item-sliding *ngFor="let item of currentItems.Tecnicos">
+      <button ion-item (click)="openItem(item)">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-5>
+              <ion-note *ngIf="item.telefono" color="primary">{{item.telefono}}</ion-note>
+              <br>
+              <ion-note *ngIf="item.intervencion" color="primary">{{'Interv.: '+ item.intervencion}}</ion-note>
+              <br>
+              <ion-note *ngIf="item.cargo" color="primary">{{'Cargo.: '+ item.cargo}}</ion-note>
+            </ion-col>
+            <ion-col>
+              <ion-note *ngIf="item.nombre_razon" color="primary">{{item.nombre_razon}}</ion-note>
+              <ion-note *ngIf="item.apellidos" color="primary">{{' ' + item.apellidos}}</ion-note>
+              <p *ngIf="item.direccion">{{item.direccion}}</p>
+              <p>
+                <span *ngIf="item.cp">{{item.cp}}</span>
+                <span *ngIf="item.cp && item.municipio">{{'-'}}</span>
+                <span *ngIf="item.municipio">{{item.municipio}}</span>
+              </p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-avatar item-end *ngIf="item.profilePic">
+          <img [src]="item.profilePic" />
+        </ion-avatar>
+        <ion-note *ngIf="item.email" color="secondary">{{item.email}}</ion-note>
+      </button>
+
+      <ion-item-options>
+        <button ion-button color="danger" (click)="deleteItem(item)">
+          <h2>
+            <ion-icon name="trash"></ion-icon>
+          </h2>
+          Eliminar
+        </button>
+        <button ion-button color="primary" (click)="updateItemTecnico(item)">
+          <h2>
+            <ion-icon name="create"></ion-icon>
+          </h2>
+          Editar
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-item-group>
+
+<!-- SECCION SUBCONTRATISTAS -->
+<ion-item-group>
+  <ion-item-divider color="dark">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-2>
+          <button ion-button icon-only (click)="addItemSubcontratista()">
+            <ion-icon name="add-circle"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col>
+          <ion-title>
+            <font color="white">SUBCONTRATISTAS</font>
+          </ion-title>
+        </ion-col>
+        <ion-col col-2>
+          <button ion-button icon-only (click)="changeCollapseSubcontratistas()">
+            <ion-icon [name]="collapseSubcontratistas?'arrow-dropup':'arrow-dropdown'"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item-divider>
+  <ion-list *ngIf="collapseSubcontratistas">
+    <ion-item-sliding *ngFor="let item of currentItems.Subcontratistas">
+      <button ion-item (click)="openItem(item)">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-5>
+              <ion-note *ngIf="item.telefono" color="primary">{{item.telefono}}</ion-note>
+              <br>
+              <ion-note *ngIf="item.intervencion" color="primary">{{'Interv.: '+ item.intervencion}}</ion-note>
+            </ion-col>
+            <ion-col>
+              <ion-note *ngIf="item.nombre_razon" color="primary">{{item.nombre_razon}}</ion-note>
+              <ion-note *ngIf="item.apellidos" color="primary">{{' ' + item.apellidos}}</ion-note>
+              <p *ngIf="item.direccion">{{item.direccion}}</p>
+              <p>
+                <span *ngIf="item.cp">{{item.cp}}</span>
+                <span *ngIf="item.cp && item.municipio">{{'-'}}</span>
+                <span *ngIf="item.municipio">{{item.municipio}}</span>
+              </p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-avatar item-end *ngIf="item.profilePic">
+          <img [src]="item.profilePic" />
+        </ion-avatar>
+        <ion-note *ngIf="item.email" color="secondary">{{item.email}}</ion-note>
+      </button>
+
+      <ion-item-options>
+        <button ion-button color="danger" (click)="deleteItem(item)">
+          <h2>
+            <ion-icon name="trash"></ion-icon>
+          </h2>
+          Eliminar
+        </button>
+        <button ion-button color="primary" (click)="updateItemSubcontratista(item)">
+          <h2>
+            <ion-icon name="create"></ion-icon>
+          </h2>
+          Editar
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-item-group>

@@ -1,10 +1,11 @@
 import { Contacto } from "./contacto";
 
-export class Cliente extends Contacto{
+export class Constructor extends Contacto{
 
     public id: number;
     public contacto_id: number;
     public obra_id: number;
+    public fase_obra: string;
     public intervencion: string;
 
     public constructor() {
@@ -12,5 +13,6 @@ export class Cliente extends Contacto{
         this.contacto_id = 0;
         this.obra_id = 0;
         this.intervencion = '';
+        this.fase_obra ='';
     }
 }
