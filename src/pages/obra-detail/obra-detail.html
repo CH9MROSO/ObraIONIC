@@ -11,12 +11,12 @@
     <img *ngIf="item.profilePic" [src]="item.profilePic">
     <div class="item-detail" padding>
       <ion-grid>
-        <ion-row>
+        <ion-row class="border-row">
           <ion-col col-1 align-self-start>
               <p><ion-icon name="key" color="primary"></ion-icon></p>
           </ion-col>
           <ion-col align-self-end>
-              <h2> {{item.id}}</h2>
+              <h2> {{'Expediente: ' + item.id}}</h2>
           </ion-col>
         </ion-row>
         <ion-row>

@@ -13,50 +13,75 @@
 </ion-header>
 
 <ion-content>
+  <ion-card *ngFor="let item of currentItems" color="primary">
+    <ion-card-header>
+      <span *ngIf="item.num_visita">
+        {{item.num_visita}}
+      </span>
+      <span *ngIf="item.fase">
+        {{'-' + item.fase}}
+      </span>
+    </ion-card-header>
+    <ion-list>
+      <ion-item-sliding>
+        <button ion-item (click)="updateItem(item)">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <p *ngIf="item.elementos">
+                  <strong>
+                    {{item.elementos}}
+                  </strong>
+                </p>
+                <p>
+                  <ion-icon name="build" [color]="colorEstado(item.estado_elementos)"></ion-icon>
+                  <span *ngIf="item.estado_elementos">
+                    {{estadoElementos(item.estado_elementos)}}
+                  </span>
+                </p>
+                <p *ngIf="item.documentos">
+                  <strong>
+                    {{item.documentos}}
+                  </strong>
+                </p>
+                <p>
+                  <ion-icon name="document" [color]="colorEstado(item.estado_documentos)"></ion-icon>
+                  <span *ngIf="item.estado_documentos">
+                    {{estadoDocumentos(item.estado_documentos)}}
+                  </span>
+                </p>
+              </ion-col>
+              <ion-col col-4>
+                <ion-note *ngIf="item.fecha" color="primary">{{item.fecha}}</ion-note>
+                <br>
+                <ion-avatar *ngIf="item.profilePic">
+                  <img [src]="item.profilePic" />
+                </ion-avatar>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <p *ngIf="item.observaciones">
+            <em>
+              {{item.observaciones}}
+            </em>
+          </p>
+        </button>
 
-  <ion-list>
-    <ion-item-sliding *ngFor="let item of currentItems">
-      <button ion-item (click)="openItem(item)">
-      <ion-grid>
-          <ion-row>
-            <ion-col col-4>
-              <ion-note *ngIf="item.fecha" color="primary">{{item.fecha}}</ion-note>
-              <br>
-              <ion-avatar *ngIf="item.profilePic">
-                <img [src]="item.profilePic" />
-              </ion-avatar>
-            </ion-col>
-            <ion-col>
-              <span>
-                <ion-note *ngIf="item.num_visita" color="primary">{{item.num_visita}}</ion-note>
-                <ion-note *ngIf="item.fase" color="primary">{{'-' + item.fase}}</ion-note>
-              </span>
-              <span>
-                <p *ngIf="item.elementos">{{item.elementos}}</p>
-                <p *ngIf="item.estado_elementos">{{item.estado_elementos}}</p>
-              </span>
-              <span>
-                <p *ngIf="item.documentos">{{item.documentos}}</p>
-                <p *ngIf="item.estado_documentos">{{item.estado_documentos}}</p>
-              </span>
-              <p *ngIf="item.observaciones">{{item.observaciones}}</p>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </button>
-
-      <ion-item-options>
-        <button ion-button color="danger" (click)="deleteItem(item)">
-            <h2><ion-icon name="trash"></ion-icon></h2>
+        <ion-item-options>
+          <button ion-button color="danger" (click)="deleteItem(item)">
+            <h2>
+              <ion-icon name="trash"></ion-icon>
+            </h2>
             Eliminar
-        </button>
-        <button ion-button color="primary" (click)="updateItem(item)">
-            <h2><ion-icon name="create"></ion-icon></h2>
+          </button>
+          <button ion-button color="primary" (click)="updateItem(item)">
+            <h2>
+              <ion-icon name="create"></ion-icon>
+            </h2>
             Editar
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </ion-card>
 </ion-content>
-
-

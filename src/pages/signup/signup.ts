@@ -5,6 +5,7 @@ import { IonicPage, NavController, ToastController, NavParams } from 'ionic-angu
 
 import { User, Api } from '../../providers/providers';
 import { MainPage } from '../pages';
+import { ConstantesProvider } from '../../providers/constantes/constantes';
 
 @IonicPage()
 @Component({
@@ -51,6 +52,7 @@ export class SignupPage {
   };
   
   id: number;
+  generos;
 
   modeUpdate: boolean = false;
 
@@ -64,8 +66,9 @@ export class SignupPage {
               public api: Api,
               public user: User,
               public toastCtrl: ToastController,
-              public translateService: TranslateService) {
-
+              public translateService: TranslateService,
+              public constantes:ConstantesProvider) {
+    this.generos = constantes.generos;           
     this.translateService.get('SIGNUP_ERROR').subscribe((value) => {
       this.signupErrorString = value;
     });

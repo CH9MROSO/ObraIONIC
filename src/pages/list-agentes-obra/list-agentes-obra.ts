@@ -431,8 +431,7 @@ export class ListAgentesObraPage implements AfterViewInit {
             this.agentesSrv.updateCliente(item.id, clienteActualizado).subscribe((resp: any) => {
               if (resp && resp.success) {
                 console.log('Cliente actualizado');
-                this.currentItems.Clientes.splice(this.currentItems.Clientes.indexOf(item),1);
-                this.currentItems.Clientes.push(clienteActualizado);
+                this.currentItems.Clientes.splice(this.currentItems.Clientes.indexOf(item),1,clienteActualizado);
 
               } else {
                 this.doErrorToastAgente('Error actualizando Cliente');
@@ -468,8 +467,7 @@ export class ListAgentesObraPage implements AfterViewInit {
             this.agentesSrv.updatePromotor(item.id, promotorActualizado).subscribe((resp: any) => {
               if (resp && resp.success) {
                 console.log('Promotor actualizado');
-                this.currentItems.Promotores.splice(this.currentItems.Promotores.indexOf(item),1);
-                this.currentItems.Promotores.push(promotorActualizado);
+                this.currentItems.Clientes.splice(this.currentItems.Clientes.indexOf(item),1,promotorActualizado);
 
               } else {
                 this.doErrorToastAgente('Error actualizando Promotor');
@@ -505,8 +503,7 @@ export class ListAgentesObraPage implements AfterViewInit {
             this.agentesSrv.updateConstructor(item.id, constructorActualizado).subscribe((resp: any) => {
               if (resp && resp.success) {
                 console.log('Constructor actualizado');
-                this.currentItems.Constructores.splice(this.currentItems.Constructores.indexOf(item),1);
-                this.currentItems.Constructores.push(constructorActualizado);
+                this.currentItems.Clientes.splice(this.currentItems.Clientes.indexOf(item),1,constructorActualizado);
 
               } else {
                 this.doErrorToastAgente('Error actualizando Constructor');
@@ -542,8 +539,7 @@ export class ListAgentesObraPage implements AfterViewInit {
             this.agentesSrv.updateTecnico(item.id, tecnicoActualizado).subscribe((resp: any) => {
               if (resp && resp.success) {
                 console.log('Tecnico actualizado');
-                this.currentItems.Tecnicos.splice(this.currentItems.Tecnicos.indexOf(item),1);
-                this.currentItems.Tecnicos.push(tecnicoActualizado);
+                this.currentItems.Clientes.splice(this.currentItems.Clientes.indexOf(item),1,tecnicoActualizado);
 
               } else {
                 this.doErrorToastAgente('Error actualizando Tecnico');
@@ -579,8 +575,7 @@ export class ListAgentesObraPage implements AfterViewInit {
             this.agentesSrv.updateSubcontratista(item.id, subcontratistaActualizado).subscribe((resp: any) => {
               if (resp && resp.success) {
                 console.log('Subcontratista actualizado');
-                this.currentItems.Subcontratistas.splice(this.currentItems.Subcontratistas.indexOf(item),1);
-                this.currentItems.Subcontratistas.push(subcontratistaActualizado);
+                this.currentItems.Clientes.splice(this.currentItems.Clientes.indexOf(item),1,subcontratistaActualizado);
 
               } else {
                 this.doErrorToastAgente('Error actualizando Subcontratista');

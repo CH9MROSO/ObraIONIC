@@ -28,7 +28,9 @@
       
       <ion-item>
         <ion-label fixed>Género</ion-label>
-        <ion-input type="text" [(ngModel)]="account.gender" name="gender"></ion-input>
+        <ion-select [(ngModel)]="account.gender" name="gender" interface="action-sheet" submitText="Ok" cancelText="Cancelar">
+          <ion-option *ngFor="let gender of generos" [value]="gender.name">{{gender.name}}</ion-option>
+        </ion-select>
       </ion-item>
 
       <ion-item>

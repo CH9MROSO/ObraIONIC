@@ -4,12 +4,20 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Camera } from '@ionic-native/camera';
 import { IonicPage, NavController, ViewController } from 'ionic-angular';
 
+/**
+ * Generated class for the VisitaCreatePage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+
 @IonicPage()
 @Component({
-  selector: 'page-obra-create',
-  templateUrl: 'obra-create.html'
+  selector: 'page-visita-create',
+  templateUrl: 'visita-create.html',
 })
-export class ObraCreatePage {
+
+export class VisitaCreatePage {
   @ViewChild('fileInput') fileInput;
 
   isReadyToSave: boolean;
@@ -21,32 +29,36 @@ export class ObraCreatePage {
   unableCamera: boolean = true;
   conditionCamera: boolean = true;
   labelResponse: string="Cámara";
-  estados;
+  fases;
 
   constructor(public navCtrl: NavController, public viewCtrl: ViewController, 
               formBuilder: FormBuilder, public camera: Camera, public constantes: ConstantesProvider) {
-    this.estados = constantes.estadosObra;
+    this.fases = constantes.intervenciones;
 
     if(viewCtrl.data){
       this.item = viewCtrl.data;
       this.form = formBuilder.group({
         profilePic: [this.item.profilePic],
-        id: [this.item.id, Validators.required],
-        descripcion: [this.item.descripcion, Validators.required],
-        ubicacion: [this.item.ubicacion, Validators.required],
-        fecha_inicio: [this.item.fecha_inicio],
-        fecha_fin: [this.item.fecha_fin],
-        estado: [this.item.estado]
+        num_visita: [this.item.num_visita, Validators.required],
+        fase: [this.item.fase, Validators.required],
+        observaciones: [this.item.observaciones],
+        fecha: [this.item.fecha],
+        elementos: [this.item.estado],
+        estado_elementos: [this.item.estado],
+        documentos: [this.item.estado],
+        estado_documentos: [this.item.estado]
       });
     }else{
       this.form = formBuilder.group({
         profilePic: [''],
-        id: ['', Validators.required],
-        descripcion: ['', Validators.required],
-        ubicacion: ['', Validators.required],
-        fecha_inicio: [''],
-        fecha_fin: [''],
-        estado: ['']
+        num_visita: ['', Validators.required],
+        fase: ['', Validators.required],
+        observaciones: [''],
+        fecha: [''],
+        elementos: [''],
+        estado_elementos: [''],
+        documentos: [''],
+        estado_documentos: ['']
       });
     }
 
@@ -120,4 +132,5 @@ export class ObraCreatePage {
     this.viewCtrl.dismiss(this.form.value);
   }
 }
+
 

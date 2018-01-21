@@ -18,6 +18,7 @@ import { ObrasProvider } from '../providers/obras/obras';
 import { AgentesProvider } from '../providers/agentes/agentes';
 import { ContactosProvider } from '../providers/contactos/contactos';
 import { VisitasProvider } from '../providers/visitas/visitas';
+import { ConstantesProvider } from '../providers/constantes/constantes';
 
 /* import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
@@ -82,7 +83,8 @@ export function provideSettings(storage: Storage) {
     ObrasProvider,
     AgentesProvider,
     ContactosProvider,
-    VisitasProvider
+    VisitasProvider,
+    ConstantesProvider
 /*     // Estable como idioma Local el ES , por ejemplo en PIPE date
     , { provide: LOCALE_ID, useValue: 'es' } */
   ]
