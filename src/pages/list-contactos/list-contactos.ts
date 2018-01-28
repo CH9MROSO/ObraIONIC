@@ -52,7 +52,7 @@ export class ListContactosPage {
         this.contactosSrv.createContacto(contactoNuevo).subscribe((resp:any) => {
           if(resp && resp.success){
             console.log('Contacto creada');
-            this.navCtrl.push(ListContactosPage);
+            this.navCtrl.setRoot(ListContactosPage);
             
           } else {
             this.doErrorToastContacto('Error creando Contacto');
@@ -74,7 +74,7 @@ export class ListContactosPage {
     this.contactosSrv.deleteContacto(item.id).subscribe((resp:any) => {
       if(resp && resp.success){
         console.log('Contacto eliminado');
-        this.navCtrl.push(ListContactosPage);
+        this.navCtrl.setRoot(ListContactosPage);
         
       } else {
         this.doErrorToastContacto('Error eliminando Contacto');
@@ -106,7 +106,7 @@ export class ListContactosPage {
         this.contactosSrv.updateContacto(item.id, contactoActualizado).subscribe((resp:any) => {
           if(resp && resp.success){
             console.log('Contacto actualizado');
-            this.navCtrl.push(ListContactosPage);
+            this.navCtrl.setRoot(ListContactosPage);
             
           } else {
             this.doErrorToastContacto('Error actualizando Contacto');

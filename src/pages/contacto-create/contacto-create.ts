@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Camera } from '@ionic-native/camera';
 import { IonicPage, NavController, ViewController } from 'ionic-angular';
+import { ConstantesProvider } from '../../providers/constantes/constantes';
 
 @IonicPage()
 @Component({
@@ -21,9 +22,23 @@ export class ContactoCreatePage {
   conditionCamera: boolean = true;
   labelResponse: string="Cámara";
 
+  agente;
+  isConstructor: boolean;
+  isTecnico: boolean;
+  isModoEdicion: boolean;
+  intervenciones;
+
   constructor(public navCtrl: NavController, public viewCtrl: ViewController, 
-              formBuilder: FormBuilder, public camera: Camera) {
-    if(viewCtrl.data){
+              formBuilder: FormBuilder, public camera: Camera,
+              public constantes:ConstantesProvider) {
+    
+    this.intervenciones = constantes.intervenciones; 
+    // Comprobamso si son algún tipo de agente
+    this.agente = viewCtrl.data.type;
+    this.isConstructor = viewCtrl.data.type == 'Constructor';
+    this.isTecnico = viewCtrl.data.type == 'Tecnico';
+    // Comprobamos si ya existe el agente o contacto (campo nombre debe existir), para volcar sus datos
+    this.isModoEdicion = viewCtrl.data.nombre_razon
       this.item = viewCtrl.data;
       let group = {
         profilePic: [this.item.profilePic],
@@ -40,38 +55,20 @@ export class ContactoCreatePage {
         tipo_persona_juridica: [this.item.tipo_persona_juridica],
         representante: [this.item.representante]
       };
-      if(viewCtrl.data.contacto_id){
+
+      //Añadimos los campos que correspondan según si es un tipo de agente
+      if(this.agente){
         group['contacto_id'] = viewCtrl.data.contacto_id;
-      }
-      if(viewCtrl.data.intervencion){
         group['intervencion'] = viewCtrl.data.intervencion;
       }
-      if(viewCtrl.data.fase_obra){
+      if(this.isConstructor){
         group['fase_obra'] = viewCtrl.data.fase_obra;
       }
-      if(viewCtrl.data.cargo){
+      if(this.isTecnico){
         group['cargo'] = viewCtrl.data.cargo;
       }
-      this.form = formBuilder.group(group);
 
-    }else{
-      let group = {
-        profilePic: [''],
-        dni_cif: [''],
-        nombre_razon: ['', Validators.required],
-        apellidos: [''],
-        direccion: [''],
-        cp: [''],
-        municipio: [''],
-        Provincia: [''],
-        Pais: [''],
-        email: [''],
-        telefono: [''],
-        tipo_persona_juridica: [''],
-        representante: ['']
-      };
       this.form = formBuilder.group(group);
-    }
 
     // Watch the form for changes, and
     this.form.valueChanges.subscribe((v) => {

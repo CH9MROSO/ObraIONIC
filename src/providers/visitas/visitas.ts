@@ -16,20 +16,7 @@ export class VisitasProvider {
     return this.api.get('visitas/Obra/' + idObra);
   }
   createVisita(VisitaNueva: Visita): Observable<any> {
-    let body = 
-      {
-        'visita': {
-          "obra_id": VisitaNueva.obra_id,
-          "num_visita": VisitaNueva.num_visita,       
-          "fecha": VisitaNueva.fecha,
-          "fase": VisitaNueva.fase,
-          "observaciones": VisitaNueva.observaciones,
-          "elementos": VisitaNueva.elementos,   
-          "estado_elementos": VisitaNueva.estado_elementos,
-          "documentos": VisitaNueva.documentos,
-          "estado_documentos": VisitaNueva.estado_documentos               
-        }
-      };
+    let body = {'visita': VisitaNueva};
     return this.api.post('visitas/nueva', body);
   }
   getVisita(id: number): Observable<any> {

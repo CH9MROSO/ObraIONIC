@@ -78,7 +78,8 @@ export class AgentesProvider {
     let body = {'constructor': {
       "contacto_id": contacto_id,
       "obra_id": obra_id,
-      "intervencion": constructorNuevo.intervencion        
+      "intervencion": constructorNuevo.intervencion,      
+      "fase_obra": constructorNuevo.fase_obra        
     }
   };
     return this.api.post('constructores/nuevo', body);
@@ -104,7 +105,8 @@ export class AgentesProvider {
     let body = {'tecnico': {
       "contacto_id": contacto_id,
       "obra_id": obra_id,
-      "intervencion": tecnicoNuevo.intervencion        
+      "intervencion": tecnicoNuevo.intervencion,        
+      "cargo": tecnicoNuevo.cargo,        
     }
   };
     return this.api.post('tecnicos/nuevo', body);

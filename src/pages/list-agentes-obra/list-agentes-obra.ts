@@ -220,7 +220,7 @@ export class ListAgentesObraPage implements AfterViewInit {
     */
   addItemCliente() {
     // SECCIÓN NUEVO Cliente
-    let addModal = this.modalCtrl.create('ContactoCreatePage');
+    let addModal = this.modalCtrl.create('ContactoCreatePage', {type : 'Cliente'});
     addModal.onDidDismiss(clienteNuevo => {
       if (clienteNuevo) {
         console.log(clienteNuevo);
@@ -259,7 +259,7 @@ export class ListAgentesObraPage implements AfterViewInit {
 
   addItemPromotor() {
     // SECCIÓN NUEVO Promotor
-    let addModal = this.modalCtrl.create('ContactoCreatePage');
+    let addModal = this.modalCtrl.create('ContactoCreatePage', {type : 'Promotor'});
     addModal.onDidDismiss(promotorNuevo => {
       if (promotorNuevo) {
         console.log(promotorNuevo);
@@ -298,7 +298,7 @@ export class ListAgentesObraPage implements AfterViewInit {
 
   addItemConstructor() {
     // SECCIÓN NUEVO Constructor
-    let addModal = this.modalCtrl.create('ContactoCreatePage');
+    let addModal = this.modalCtrl.create('ContactoCreatePage', {type : 'Constructor'});
     addModal.onDidDismiss(constructorNuevo => {
       if (constructorNuevo) {
         console.log(constructorNuevo);
@@ -337,7 +337,7 @@ export class ListAgentesObraPage implements AfterViewInit {
 
   addItemTecnico() {
     // SECCIÓN NUEVO Tecnico
-    let addModal = this.modalCtrl.create('ContactoCreatePage');
+    let addModal = this.modalCtrl.create('ContactoCreatePage', {type : 'Tecnico'});
     addModal.onDidDismiss(tecnicoNuevo => {
       if (tecnicoNuevo) {
         console.log(tecnicoNuevo);
@@ -376,7 +376,7 @@ export class ListAgentesObraPage implements AfterViewInit {
 
   addItemSubcontratista() {
     // SECCIÓN NUEVO Subcontratista
-    let addModal = this.modalCtrl.create('ContactoCreatePage');
+    let addModal = this.modalCtrl.create('ContactoCreatePage', {type : 'Subcontratista'});
     addModal.onDidDismiss(subcontratistaNuevo => {
       if (subcontratistaNuevo) {
         console.log(subcontratistaNuevo);
@@ -467,7 +467,7 @@ export class ListAgentesObraPage implements AfterViewInit {
             this.agentesSrv.updatePromotor(item.id, promotorActualizado).subscribe((resp: any) => {
               if (resp && resp.success) {
                 console.log('Promotor actualizado');
-                this.currentItems.Clientes.splice(this.currentItems.Clientes.indexOf(item),1,promotorActualizado);
+                this.currentItems.Promotores.splice(this.currentItems.Promotores.indexOf(item),1,promotorActualizado);
 
               } else {
                 this.doErrorToastAgente('Error actualizando Promotor');
@@ -503,7 +503,7 @@ export class ListAgentesObraPage implements AfterViewInit {
             this.agentesSrv.updateConstructor(item.id, constructorActualizado).subscribe((resp: any) => {
               if (resp && resp.success) {
                 console.log('Constructor actualizado');
-                this.currentItems.Clientes.splice(this.currentItems.Clientes.indexOf(item),1,constructorActualizado);
+                this.currentItems.Constructores.splice(this.currentItems.Constructores.indexOf(item),1,constructorActualizado);
 
               } else {
                 this.doErrorToastAgente('Error actualizando Constructor');
@@ -539,7 +539,7 @@ export class ListAgentesObraPage implements AfterViewInit {
             this.agentesSrv.updateTecnico(item.id, tecnicoActualizado).subscribe((resp: any) => {
               if (resp && resp.success) {
                 console.log('Tecnico actualizado');
-                this.currentItems.Clientes.splice(this.currentItems.Clientes.indexOf(item),1,tecnicoActualizado);
+                this.currentItems.Tecnicos.splice(this.currentItems.Tecnicos.indexOf(item),1,tecnicoActualizado);
 
               } else {
                 this.doErrorToastAgente('Error actualizando Tecnico');
@@ -575,7 +575,7 @@ export class ListAgentesObraPage implements AfterViewInit {
             this.agentesSrv.updateSubcontratista(item.id, subcontratistaActualizado).subscribe((resp: any) => {
               if (resp && resp.success) {
                 console.log('Subcontratista actualizado');
-                this.currentItems.Clientes.splice(this.currentItems.Clientes.indexOf(item),1,subcontratistaActualizado);
+                this.currentItems.Subcontratistas.splice(this.currentItems.Subcontratistas.indexOf(item),1,subcontratistaActualizado);
 
               } else {
                 this.doErrorToastAgente('Error actualizando Subcontratista');

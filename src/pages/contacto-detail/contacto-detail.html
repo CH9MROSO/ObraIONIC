@@ -10,7 +10,7 @@
 <ion-content>
   <img *ngIf="item.profilePic" [src]="item.profilePic">
   <!--   Sección de Detalles de la Relación del Contacto con la Obra -->
-  <div *ngIf="item.intervencion || item.fase_obra" class="item-detail" padding>
+  <div *ngIf="item.intervencion || item.fase_obra || item.cargo" class="item-detail" padding>
     <ion-grid>
       <ion-row>
         <ion-col col-1 align-self-start *ngIf="item.intervencion">
@@ -30,6 +30,15 @@
         <ion-col align-self-end *ngIf="item.fase_obra">
           <p> Fase de Obra</p>
           <h3> {{item.fase_obra}}</h3>
+        </ion-col>
+        <ion-col col-1 align-self-start *ngIf="item.cargo">
+          <p>
+            <ion-icon name="build" color="primary"></ion-icon>
+          </p>
+        </ion-col>
+        <ion-col align-self-end *ngIf="item.cargo">
+          <p> Cargo</p>
+          <h3> {{item.cargo}}</h3>
         </ion-col>
       </ion-row>
     </ion-grid>

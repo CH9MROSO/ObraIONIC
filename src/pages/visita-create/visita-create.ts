@@ -1,8 +1,8 @@
-import { ConstantesProvider } from './../../providers/constantes/constantes';
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Camera } from '@ionic-native/camera';
 import { IonicPage, NavController, ViewController } from 'ionic-angular';
+import { ConstantesProvider } from '../../providers/constantes/constantes';
 
 /**
  * Generated class for the VisitaCreatePage page.
@@ -16,8 +16,8 @@ import { IonicPage, NavController, ViewController } from 'ionic-angular';
   selector: 'page-visita-create',
   templateUrl: 'visita-create.html',
 })
-
 export class VisitaCreatePage {
+
   @ViewChild('fileInput') fileInput;
 
   isReadyToSave: boolean;
@@ -29,38 +29,38 @@ export class VisitaCreatePage {
   unableCamera: boolean = true;
   conditionCamera: boolean = true;
   labelResponse: string="Cámara";
-  fases;
+
+  isModoEdicion: boolean;
+
+  estados_elementos;
+  estados_documentos;
+  intervenciones;
 
   constructor(public navCtrl: NavController, public viewCtrl: ViewController, 
-              formBuilder: FormBuilder, public camera: Camera, public constantes: ConstantesProvider) {
-    this.fases = constantes.intervenciones;
+              formBuilder: FormBuilder, public camera: Camera,
+              public constantes:ConstantesProvider) {
 
-    if(viewCtrl.data){
+      this.estados_elementos = constantes.estadosElementos;  
+      this.estados_documentos = constantes.estadosDocumentos;  
+      this.intervenciones = constantes.intervenciones;  
+    // Comprobamos si ya existe el agente o contacto (campo nombre debe existir), para volcar sus datos
+      this.isModoEdicion = viewCtrl.data
       this.item = viewCtrl.data;
-      this.form = formBuilder.group({
+      let group = {
+        id: [this.item.id],
         profilePic: [this.item.profilePic],
-        num_visita: [this.item.num_visita, Validators.required],
+        num_visita: [this.item.num_visita],
         fase: [this.item.fase, Validators.required],
-        observaciones: [this.item.observaciones],
         fecha: [this.item.fecha],
-        elementos: [this.item.estado],
-        estado_elementos: [this.item.estado],
-        documentos: [this.item.estado],
-        estado_documentos: [this.item.estado]
-      });
-    }else{
-      this.form = formBuilder.group({
-        profilePic: [''],
-        num_visita: ['', Validators.required],
-        fase: ['', Validators.required],
-        observaciones: [''],
-        fecha: [''],
-        elementos: [''],
-        estado_elementos: [''],
-        documentos: [''],
-        estado_documentos: ['']
-      });
-    }
+        observaciones: [this.item.observaciones],
+        elementos: [this.item.elementos],
+        estado_elementos: [this.item.estado_elementos],
+        documentos: [this.item.documentos],
+        estado_documentos: [this.item.estado_documentos],
+        obra_id: [this.item.obra_id],
+      };
+
+      this.form = formBuilder.group(group);
 
     // Watch the form for changes, and
     this.form.valueChanges.subscribe((v) => {
@@ -132,5 +132,3 @@ export class VisitaCreatePage {
     this.viewCtrl.dismiss(this.form.value);
   }
 }
-
-

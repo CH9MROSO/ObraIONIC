@@ -23,16 +23,18 @@ export class ListVisitasPage {
   currentItems: Visita[];
   estadosElementos;
   estadosDocumentos;
+  intervenciones
 
-  constructor(public navCtrl: NavController, public navParam: NavParams, public visitasSrv: VisitasProvider, 
-              public modalCtrl: ModalController, public toastCtrl: ToastController, public constantes: ConstantesProvider) {
+  constructor(public navCtrl: NavController, public navParam: NavParams, public visitasSrv: VisitasProvider,
+    public modalCtrl: ModalController, public toastCtrl: ToastController, public constantes: ConstantesProvider) {
     this.estadosElementos = constantes.estadosDocumentos;
     this.estadosDocumentos = constantes.estadosDocumentos;
+    this.intervenciones = constantes.intervenciones;
     this.currentObra = this.navParam.get('obra');
-    this.visitasSrv.getAllVisitasObra(this.currentObra.id).subscribe((resp:any) => {
-      if(resp && resp.success){
+    this.visitasSrv.getAllVisitasObra(this.currentObra.id).subscribe((resp: any) => {
+      if (resp && resp.success) {
         this.currentItems = resp.visitas;
-        
+
       } else {
         this.doErrorToastVisita('Error al obtener Visitas');
       }
@@ -52,16 +54,19 @@ export class ListVisitasPage {
    * modal and then adds the new item to our data source if the user created one.
    */
   addItem() {
-    let addModal = this.modalCtrl.create('VisitaCreatePage');
+    let addModal = this.modalCtrl.create('VisitaCreatePage', { obra_id: this.currentObra.id });
     addModal.onDidDismiss(visitaNueva => {
       if (visitaNueva) {
         console.log(visitaNueva);
-        
-        this.visitasSrv.createVisita(visitaNueva).subscribe((resp:any) => {
-          if(resp && resp.success){
+
+        this.visitasSrv.createVisita(visitaNueva).subscribe((resp: any) => {
+          if (resp && resp.success) {
             console.log('Visita creada');
-            this.navCtrl.push(ListVisitasPage);
-            
+            //Navego a la misma Página para actualizar, removiendo de la pila
+            //la vista anterior a la que acabo de navegar
+            this.navCtrl.push(ListVisitasPage, { obra: this.currentObra }).then(
+              () => this.navCtrl.removeView(this.navCtrl.getPrevious()));
+
           } else {
             this.doErrorToastVisita('Error creando Visita');
           }
@@ -78,12 +83,15 @@ export class ListVisitasPage {
    */
   deleteItem(item) {
     console.log(item.id);
-    
-    this.visitasSrv.deleteVisita(item.id).subscribe((resp:any) => {
-      if(resp && resp.success){
+
+    this.visitasSrv.deleteVisita(item.id).subscribe((resp: any) => {
+      if (resp && resp.success) {
         console.log('Visita eliminada');
-        this.navCtrl.push(ListVisitasPage);
-        
+        //Navego a la misma Página para actualizar, removiendo de la pila
+        //la vista anterior a la que acabo de navegar
+        this.navCtrl.push(ListVisitasPage, { obra: this.currentObra }).then(
+          () => this.navCtrl.removeView(this.navCtrl.getPrevious()));
+
       } else {
         this.doErrorToastVisita('Error eliminando Visita');
       }
@@ -100,12 +108,15 @@ export class ListVisitasPage {
     addModal.onDidDismiss(visitaActualizada => {
       if (visitaActualizada) {
         console.log(visitaActualizada);
-        
-        this.visitasSrv.updateVisita(item.id, visitaActualizada).subscribe((resp:any) => {
-          if(resp && resp.success){
+
+        this.visitasSrv.updateVisita(visitaActualizada.id, visitaActualizada).subscribe((resp: any) => {
+          if (resp && resp.success) {
             console.log('Visita actualizada');
-            this.navCtrl.push(ListVisitasPage);
-            
+            //Navego a la misma Página para actualizar, removiendo de la pila
+            //la vista anterior a la que acabo de navegar
+            this.navCtrl.push(ListVisitasPage, { obra: this.currentObra }).then(
+              () => this.navCtrl.removeView(this.navCtrl.getPrevious()));
+
           } else {
             this.doErrorToastVisita('Error actualizando Visita');
           }
@@ -117,78 +128,79 @@ export class ListVisitasPage {
     addModal.present();
   }
 
-  colorEstado(item){
+  colorEstado(item) {
     let color = 'primary';
     switch (Number.parseInt(item)) {
       case 0:
-        color ='faint';
+        color = 'faint';
         break;
       case 1:
-        color ='danger';
+        color = 'danger';
         break;
       case 2:
-        color ='primary';
+        color = 'primary';
         break;
       case 3:
-        color ='secondary';
+        color = 'secondary';
         break;
       default:
-        color ='faint';
+        color = 'faint';
         break;
     }
     return color;
   }
-  estadoElementos(item){
+
+  estadoElementos(item) {
     let estado = this.constantes.estadosElementos[0].name;
     switch (Number.parseInt(item)) {
       case 0:
-        estado =this.constantes.estadosElementos[0].name;
+        estado = this.constantes.estadosElementos[0].name;
         break;
       case 1:
-        estado =this.constantes.estadosElementos[1].name;
+        estado = this.constantes.estadosElementos[1].name;
         break;
       case 2:
-        estado =this.constantes.estadosElementos[2].name;
+        estado = this.constantes.estadosElementos[2].name;
         break;
       case 3:
-        estado =this.constantes.estadosElementos[3].name;
+        estado = this.constantes.estadosElementos[3].name;
         break;
       default:
-        estado =this.constantes.estadosElementos[0].name;
+        estado = this.constantes.estadosElementos[0].name;
         break;
     }
     return estado;
   }
-  estadoDocumentos(item){
+  estadoDocumentos(item) {
     let estado = this.constantes.estadosDocumentos[0].name;
     switch (Number.parseInt(item)) {
       case 0:
-        estado =this.constantes.estadosDocumentos[0].name;
+        estado = this.constantes.estadosDocumentos[0].name;
         break;
       case 1:
-        estado =this.constantes.estadosDocumentos[1].name;
+        estado = this.constantes.estadosDocumentos[1].name;
         break;
       case 2:
-        estado =this.constantes.estadosDocumentos[2].name;
+        estado = this.constantes.estadosDocumentos[2].name;
         break;
       case 3:
-        estado =this.constantes.estadosDocumentos[3].name;
+        estado = this.constantes.estadosDocumentos[3].name;
         break;
       default:
-        estado =this.constantes.estadosDocumentos[0].name;
+        estado = this.constantes.estadosDocumentos[0].name;
         break;
     }
     return estado;
   }
 
   doErrorToastVisita(msg: string) {
-      // Unable to log in
-      let toast = this.toastCtrl.create({
-        message: msg,
-        duration: 3000,
-        position: 'top'
-      });
-      toast.present();
+    // Unable to log in
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present();
   }
 
 }

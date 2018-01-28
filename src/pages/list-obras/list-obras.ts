@@ -52,7 +52,7 @@ export class ListObrasPage {
         this.obrasSrv.createObra(obraNueva).subscribe((resp:any) => {
           if(resp && resp.success){
             console.log('Obra creada');
-            this.navCtrl.push(ListObrasPage);
+            this.navCtrl.setRoot(ListObrasPage);
             
           } else {
             this.doErrorToastObra('Error creando Obra');
@@ -74,7 +74,7 @@ export class ListObrasPage {
     this.obrasSrv.deleteObra(item.id).subscribe((resp:any) => {
       if(resp && resp.success){
         console.log('Obra eliminada');
-        this.navCtrl.push(ListObrasPage);
+        this.navCtrl.setRoot(ListObrasPage);
         
       } else {
         this.doErrorToastObra('Error eliminando Obra');
@@ -105,7 +105,7 @@ export class ListObrasPage {
         this.obrasSrv.updateObra(item.id, obraActualizada).subscribe((resp:any) => {
           if(resp && resp.success){
             console.log('Obra actualizada');
-            this.navCtrl.push(ListObrasPage);
+            this.navCtrl.setRoot(ListObrasPage);
             
           } else {
             this.doErrorToastObra('Error actualizando Obra');

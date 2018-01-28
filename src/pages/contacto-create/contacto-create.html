@@ -1,145 +1,209 @@
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Nuevo Contacto</ion-title>
-    <ion-buttons start>
-      <button ion-button (click)="cancel()">
-        <span color="primary" showWhen="ios">
-          {{ 'CANCEL_BUTTON' | translate }}
-        </span>
-        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
-      </button>
-    </ion-buttons>
-    <ion-buttons end>
-      <button ion-button (click)="done()" [disabled]="!isReadyToSave" strong>
-        <span color="primary" showWhen="ios">
-          {{ 'DONE_BUTTON' | translate }}
-        </span>
-        <ion-icon name="md-checkmark" showWhen="core,android,windows"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title *ngIf="!isModoEdicion && !agente">Nuevo Contacto</ion-title>
+        <ion-title *ngIf="!isModoEdicion && agente">{{'Nuevo '+ agente}}</ion-title>
+        <ion-title *ngIf="isModoEdicion && !agente">Edición Contacto</ion-title>
+        <ion-title *ngIf="isModoEdicion && agente">{{'Edición '+ agente}}</ion-title>
+        <ion-buttons start>
+            <button ion-button (click)="cancel()">
+                <span color="primary" showWhen="ios">
+                    {{ 'CANCEL_BUTTON' | translate }}
+                </span>
+                <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-buttons end>
+            <button ion-button (click)="done()" [disabled]="!isReadyToSave" strong>
+                <span color="primary" showWhen="ios">
+                    {{ 'DONE_BUTTON' | translate }}
+                </span>
+                <ion-icon name="md-checkmark" showWhen="core,android,windows"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-  <ion-item *ngIf="!unableCamera" >
-    <ion-label>{{labelResponse}}</ion-label>
-    <ion-toggle [(ngModel)]="conditionCamera" color="primary" checked="true" (ionChange)="changeLabel()"></ion-toggle>
-  </ion-item>
-  <form *ngIf="form" [formGroup]="form" (ngSubmit)="createItem()">
-    <input type="file" #fileInput style="visibility: hidden; height: 0px" name="files[]" (change)="processWebImage($event)" />
-    <div class="profile-image-wrapper" (click)="getPicture()">
-      <div class="profile-image-placeholder" *ngIf="!this.form.controls.profilePic.value">
-        <ion-icon name="add"></ion-icon>
-        <div>
-          {{ 'ITEM_CREATE_CHOOSE_IMAGE' | translate }}
+    <ion-item *ngIf="!unableCamera">
+        <ion-label>{{labelResponse}}</ion-label>
+        <ion-toggle [(ngModel)]="conditionCamera" color="primary" checked="true" (ionChange)="changeLabel()"></ion-toggle>
+    </ion-item>
+    <form *ngIf="form" [formGroup]="form" (ngSubmit)="createItem()">
+        <input type="file" #fileInput style="visibility: hidden; height: 0px" name="files[]" (change)="processWebImage($event)" />
+        <div class="profile-image-wrapper" (click)="getPicture()">
+            <div class="profile-image-placeholder" *ngIf="!this.form.controls.profilePic.value">
+                <ion-icon name="add"></ion-icon>
+                <div>
+                    {{ 'ITEM_CREATE_CHOOSE_IMAGE' | translate }}
+                </div>
+            </div>
+            <div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="this.form.controls.profilePic.value"></div>
         </div>
-      </div>
-      <div class="profile-image" [style.backgroundImage]="getProfileImageStyle()" *ngIf="this.form.controls.profilePic.value"></div>
-    </div>
-    <ion-list>
-        <ion-grid>
-            <ion-row>
-                <ion-col col-1 align-self-start>
-                    <p><ion-icon name="contact" color="primary"></ion-icon></p>
-                </ion-col>
-                <ion-col align-self-end>
-                    <ion-item>
-                        <ion-label floating>DNI / CIF:</ion-label>
-                        <ion-input type="text" formControlName="dni_cif"></ion-input>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label floating>Nombre / Razón Social:</ion-label>
-                        <ion-input type="text" formControlName="nombre_razon"></ion-input>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label floating>Apellidos:</ion-label>
-                        <ion-input type="text" formControlName="apellidos"></ion-input>
-                    </ion-item>
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col col-1 align-self-start>
-                    <p><ion-icon name="pin" color="primary"></ion-icon></p>
-                </ion-col>
-                <ion-col align-self-end>
-                    <ion-item>
-                        <ion-label floating>Dirección:</ion-label>
-                        <ion-input type="text" formControlName="direccion"></ion-input>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label floating>CP:</ion-label>
-                        <ion-input type="number" formControlName="cp"></ion-input>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label floating>Municipio:</ion-label>
-                        <ion-input type="text" formControlName="municipio"></ion-input>
-                    </ion-item>
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col col-1 align-self-start>
-                    <p><ion-icon name="locate" color="primary"></ion-icon></p>
-                </ion-col>
-                <ion-col align-self-end>
-                    <ion-item>
-                        <ion-label floating>Provincia:</ion-label>
-                        <ion-input type="text" formControlName="Provincia"></ion-input>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label floating>Pais:</ion-label>
-                        <ion-input type="text" formControlName="Pais"></ion-input>
-                    </ion-item>
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col col-1 align-self-start>
-                    <p><ion-icon name="call" color="primary"></ion-icon></p>
-                </ion-col>
-                <ion-col align-self-end>
-                    <ion-item>
-                        <ion-label floating>Télefono:</ion-label>
-                        <ion-input type="tel" formControlName="telefono"></ion-input>
-                    </ion-item>
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col col-1 align-self-start>
-                    <p><ion-icon name="mail" color="primary"></ion-icon></p>
-                </ion-col>
-                <ion-col align-self-end>
-                    <ion-item>
-                        <ion-label floating>Email:</ion-label>
-                        <ion-input type="email" formControlName="email"></ion-input>
-                    </ion-item>
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col col-1 align-self-start>
-                    <p><ion-icon name="person" color="primary"></ion-icon></p>
-                </ion-col>
-                <ion-col align-self-end>
-                    <ion-item>
-                        <ion-label floating>Tipo Persona Jurídica:</ion-label>
-                        <ion-input type="text" formControlName="tipo_persona_juridica"></ion-input>
-                    </ion-item>
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col col-1 align-self-start>
-                    <p><ion-icon name="contacts" color="primary"></ion-icon></p>
-                </ion-col>
-                <ion-col align-self-end>
-                    <ion-item>
-                        <ion-label floating>Representante:</ion-label>
-                        <ion-input type="text" formControlName="representante"></ion-input>
-                    </ion-item>
-                </ion-col>
-              </ion-row>
-          </ion-grid>
-    </ion-list>
-  </form>
-</ion-content>
+        <!--   Sección de Detalles de la Relación del Contacto con la Obra -->
+        <div *ngIf="agente" class="item-detail" padding>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-1 align-self-start>
+                        <p>
+                            <ion-icon name="cog" color="primary"></ion-icon>
+                        </p>
+                    </ion-col>
+                    <ion-col align-self-end>
+                        <ion-item>
+                            <ion-label floating>Intervención Obra:</ion-label>
+                            <ion-select formControlName="intervencion" interface="action-sheet" submitText="Ok" cancelText="Cancelar">
+                                <ion-option *ngFor="let intervencion of intervenciones" [value]="intervencion.name">{{intervencion.name}}</ion-option>
+                              </ion-select>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-1 align-self-start *ngIf="isConstructor">
+                        <p>
+                            <ion-icon name="construct" color="primary"></ion-icon>
+                        </p>
+                    </ion-col>
+                    <ion-col align-self-end *ngIf="isConstructor">
+                        <ion-item>
+                            <ion-label floating>Fase Obra:</ion-label>
+                            <ion-input type="text" formControlName="fase_obra"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col col-1 align-self-start *ngIf="isTecnico">
+                        <p>
+                            <ion-icon name="build" color="primary"></ion-icon>
+                        </p>
+                    </ion-col>
+                    <ion-col align-self-end *ngIf="isTecnico">
+                        <ion-item>
+                            <ion-label floating>Cargo:</ion-label>
+                            <ion-input type="text" formControlName="cargo"></ion-input>
+                        </ion-item>
+                    </ion-col>
 
+                </ion-row>
+            </ion-grid>
+            <hr>
+        </div>
+        <div class="item-detail" padding>
+            <ion-list>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-1 align-self-start>
+                            <p>
+                                <ion-icon name="contact" color="primary"></ion-icon>
+                            </p>
+                        </ion-col>
+                        <ion-col align-self-end>
+                            <ion-item>
+                                <ion-label floating>DNI / CIF:</ion-label>
+                                <ion-input type="text" formControlName="dni_cif"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label floating>Nombre / Razón Social:</ion-label>
+                                <ion-input type="text" formControlName="nombre_razon"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label floating>Apellidos:</ion-label>
+                                <ion-input type="text" formControlName="apellidos"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-1 align-self-start>
+                            <p>
+                                <ion-icon name="pin" color="primary"></ion-icon>
+                            </p>
+                        </ion-col>
+                        <ion-col align-self-end>
+                            <ion-item>
+                                <ion-label floating>Dirección:</ion-label>
+                                <ion-input type="text" formControlName="direccion"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label floating>CP:</ion-label>
+                                <ion-input type="number" formControlName="cp"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label floating>Municipio:</ion-label>
+                                <ion-input type="text" formControlName="municipio"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-1 align-self-start>
+                            <p>
+                                <ion-icon name="locate" color="primary"></ion-icon>
+                            </p>
+                        </ion-col>
+                        <ion-col align-self-end>
+                            <ion-item>
+                                <ion-label floating>Provincia:</ion-label>
+                                <ion-input type="text" formControlName="Provincia"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label floating>Pais:</ion-label>
+                                <ion-input type="text" formControlName="Pais"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-1 align-self-start>
+                            <p>
+                                <ion-icon name="call" color="primary"></ion-icon>
+                            </p>
+                        </ion-col>
+                        <ion-col align-self-end>
+                            <ion-item>
+                                <ion-label floating>Télefono:</ion-label>
+                                <ion-input type="tel" formControlName="telefono"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-1 align-self-start>
+                            <p>
+                                <ion-icon name="mail" color="primary"></ion-icon>
+                            </p>
+                        </ion-col>
+                        <ion-col align-self-end>
+                            <ion-item>
+                                <ion-label floating>Email:</ion-label>
+                                <ion-input type="email" formControlName="email"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-1 align-self-start>
+                            <p>
+                                <ion-icon name="person" color="primary"></ion-icon>
+                            </p>
+                        </ion-col>
+                        <ion-col align-self-end>
+                            <ion-item>
+                                <ion-label floating>Tipo Persona Jurídica:</ion-label>
+                                <ion-input type="text" formControlName="tipo_persona_juridica"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-1 align-self-start>
+                            <p>
+                                <ion-icon name="contacts" color="primary"></ion-icon>
+                            </p>
+                        </ion-col>
+                        <ion-col align-self-end>
+                            <ion-item>
+                                <ion-label floating>Representante:</ion-label>
+                                <ion-input type="text" formControlName="representante"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-list>
+        </div>
+    </form>
+</ion-content>

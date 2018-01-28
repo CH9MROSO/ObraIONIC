@@ -12,14 +12,19 @@ export class ContactosProvider {
   getAllContactos(): Observable<any> {
     return this.api.get('contactos');
   }
-  createContacto(contactoNuevo: Contacto): Observable<any> {
+  createContacto(contactoNuevoOriginal: any): Observable<any> {
+    let contactoNuevo = JSON.parse(JSON.stringify(contactoNuevoOriginal))
+    delete contactoNuevo.contacto_id;
+    delete contactoNuevo.intervencion;
+    delete contactoNuevo.fase_obra;
+    delete contactoNuevo.cargo;
     let body = {'contacto': contactoNuevo};
     return this.api.post('contactos/nuevo', body);
   }
   getContacto(id: number): Observable<any> {
     return this.api.get('contactos/' + id);
   }
-  updateContacto(id:number, contactoActualizado: Contacto): Observable<any> {
+  updateContacto(id:number, contactoActualizado: any): Observable<any> {
     let body = {'contacto': contactoActualizado};
     return this.api.put('contactos', id, body);
   }
