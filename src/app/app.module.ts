@@ -19,6 +19,7 @@ import { AgentesProvider } from '../providers/agentes/agentes';
 import { ContactosProvider } from '../providers/contactos/contactos';
 import { VisitasProvider } from '../providers/visitas/visitas';
 import { ConstantesProvider } from '../providers/constantes/constantes';
+import { CallNumber } from '@ionic-native/call-number';
 
 /* import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
@@ -75,6 +76,7 @@ export function provideSettings(storage: Storage) {
     Items,
     User,
     Camera,
+    CallNumber,
     SplashScreen,
     StatusBar,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },

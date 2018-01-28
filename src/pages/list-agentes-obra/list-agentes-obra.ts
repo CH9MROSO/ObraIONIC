@@ -1,3 +1,4 @@
+import { ConstantesProvider } from './../../providers/constantes/constantes';
 import { ObraDetailPage } from './../obra-detail/obra-detail';
 import { ContactosProvider } from './../../providers/contactos/contactos';
 import { Component, Input, AfterViewInit } from '@angular/core';
@@ -6,6 +7,8 @@ import { IonicPage, NavController, NavParams, ModalController, ToastController }
 import { AgentesProvider } from '../../providers/agentes/agentes';
 import { Cliente } from '../../models/cliente';
 import { TabsPage } from '../tabs/tabs';
+
+import { CallNumber } from '@ionic-native/call-number';
 
 /**
  * Generated class for the ListAgentesObraPage page.
@@ -207,7 +210,7 @@ export class ListAgentesObraPage implements AfterViewInit {
   /**
    * Navigate to the detail page for this item.
    */
-  openItem(item: any) {
+  openItem(item: any, e: Event) {
     this.navCtrl.push('ContactoDetailPage', {
       typeItem: item.type,
       item: item,

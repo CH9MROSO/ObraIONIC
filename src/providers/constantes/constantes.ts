@@ -74,7 +74,6 @@ export class ConstantesProvider {
     {id:34, name : 'Gestión de Residuos'}
   ]
 
-  constructor() {
-  }
+
 
 }

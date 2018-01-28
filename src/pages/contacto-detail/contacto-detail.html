@@ -98,14 +98,14 @@
           </p>
         </ion-col>
       </ion-row>
-      <ion-row *ngIf="item.telefono">
+      <ion-row *ngIf="item.telefono" (click)="callTel(item.telefono)">
         <ion-col col-1 align-self-start>
           <p>
             <ion-icon name="call" color="primary"></ion-icon>
           </p>
         </ion-col>
         <ion-col align-self-end>
-          <p> {{item.telefono}}</p>
+          <p style="color:green;"><strong>{{item.telefono}}</strong></p>
         </ion-col>
       </ion-row>
       <ion-row *ngIf="item.email">
