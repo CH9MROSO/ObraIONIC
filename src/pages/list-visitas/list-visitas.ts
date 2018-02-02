@@ -50,7 +50,7 @@ export class ListVisitasPage {
   }
 
   /**
-   * Prompt the user to add a new item. This shows our ItemCreatePage in a
+   * Prompt the user to add a new item. This shows our VisitaCreatePage in a
    * modal and then adds the new item to our data source if the user created one.
    */
   addItem() {

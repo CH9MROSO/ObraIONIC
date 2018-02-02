@@ -7,7 +7,7 @@ export const MainPage = 'TabsPage';
 
 // The initial root pages for our tabs (remove if not using tabs)
 export const Tab1Root = 'ListObrasPage';
-/* export const Tab2Root = 'SearchPage'; //Para realizar Búsquedas*/
+
 export const Tab2Root = 'ListContactosPage';
-/* export const Tab3Root = 'SettingsPage'; */
+
 export const Tab3Root = 'SignupPage';

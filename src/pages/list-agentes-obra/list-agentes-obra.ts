@@ -218,7 +218,7 @@ export class ListAgentesObraPage implements AfterViewInit {
   }
 
   /**
-    * Prompt the user to add a new item. This shows our ItemCreatePage in a
+    * Prompt the user to add a new item. This shows our ContactoCreatePage in a
     * modal and then adds the new item to our data source if the user created one.
     */
   addItemCliente() {
