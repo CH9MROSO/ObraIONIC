@@ -20,6 +20,7 @@ import { ContactosProvider } from '../providers/contactos/contactos';
 import { VisitasProvider } from '../providers/visitas/visitas';
 import { ConstantesProvider } from '../providers/constantes/constantes';
 import { CallNumber } from '@ionic-native/call-number';
+import { EmailComposer } from '@ionic-native/email-composer';
 
 /* import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
@@ -77,6 +78,7 @@ export function provideSettings(storage: Storage) {
     User,
     Camera,
     CallNumber,
+    EmailComposer,
     SplashScreen,
     StatusBar,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },

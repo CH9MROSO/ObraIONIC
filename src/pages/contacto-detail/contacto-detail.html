@@ -105,17 +105,17 @@
           </p>
         </ion-col>
         <ion-col align-self-end>
-          <p style="color:green;"><strong>{{item.telefono}}</strong></p>
+          <ion-note *ngIf="item.telefono" color="primary">{{item.telefono}}</ion-note>
         </ion-col>
       </ion-row>
-      <ion-row *ngIf="item.email">
+      <ion-row *ngIf="item.email" (click)="sendEmail(item.email)">
         <ion-col col-1 align-self-start>
           <p>
             <ion-icon name="mail" color="primary"></ion-icon>
           </p>
         </ion-col>
         <ion-col align-self-end>
-          <p> {{item.email}}</p>
+          <ion-note *ngIf="item.email" color="secondary">{{item.email}}</ion-note>
         </ion-col>
       </ion-row>
       <ion-row *ngIf="item.tipo_persona_juridica">

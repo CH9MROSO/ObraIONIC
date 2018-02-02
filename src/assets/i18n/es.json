@@ -11,14 +11,19 @@
 
   "MAP_TITLE": "Mapa",
 
-  "TUTORIAL_SLIDE1_TITLE": "Bienvenido/a al Ionic Super Starter",
-  "TUTORIAL_SLIDE1_DESCRIPTION": "El <b>Ionic Super Starter</b> es un starter de Ionic completo con muchas páginas preconstruidas y mejores prácticas.",
+  "TUTORIAL_SLIDE1_TITLE": "Bienvenido/a a tu Gestor de Obras",
+  "TUTORIAL_SLIDE1_DESCRIPTION": "Esta App es una herramienta ideal para mantener una <b>Agenda de tus Obras</b>, insertando y editando tus Obras actuales y existentes.",
 
-  "TUTORIAL_SLIDE2_TITLE": "Cómo usar el Super Starter",
-  "TUTORIAL_SLIDE2_DESCRIPTION": "Monta los varios tipos de página que quieras y quita los que no. Hemos incluido muchas estructuras de página comunes en apps móviles, como páginas de inicio de sesión y registro, pestañas, y esta página de tutorial.",
+  "TUTORIAL_SLIDE2_TITLE": "Fichas de Obras",
+  "TUTORIAL_SLIDE2_DESCRIPTION": "Podrás observar la ficha de tus Obras que incluye además la gestión de <b>Visitas, y Agentes</b> (Clientes, Promotores, Constructores, Técnicos y Subcontratistas).",
 
-  "TUTORIAL_SLIDE3_TITLE": "Empezando",
-  "TUTORIAL_SLIDE3_DESCRIPTION": "¿Necesitas ayuda? Échale un vistazo al README del Super Starter para ver el tutorial completo.",
+  "TUTORIAL_SLIDE3_TITLE": "Fichas de Visitas",
+  "TUTORIAL_SLIDE3_DESCRIPTION": "¿Quierés llevar un Libro de órdenes? Que mejor manera que llevando en tu mano un listado de tarjetas de <b>Visitas, con Elementos Constructivos y Documentos</b> (Dónde controlarás el estado de los mismos).",
+  
+  "TUTORIAL_SLIDE4_TITLE": "Contactos",
+  "TUTORIAL_SLIDE4_DESCRIPTION": "¿Necesitas navegar hacia tus contactos? Pues esta agenda de contactos te permitirá mediante un toque <b>Llamar y Enviar tus Email</b> de forma inmediata, a los diferentes <b>Agentes y Contactos</b> de cada una de tus obras.",
+  
+  "TUTORIAL_CONTINUE_BUTTON": "Entra a tu App!!.",
 
   "WELCOME_INTRO": "Bienvenido a tu Gestor de Obras",
 
